@@ -136,3 +136,8 @@ CREATE VIEW nsccSchedule AS
 			cd.component = rd.component and
 			cd.deliveryId = rd.deliveryId);
 
+/*
+[todo:] Need to do something here to create a
+table of all the Classrooms
+so we can find classrooms WITHOUT classes
+ */

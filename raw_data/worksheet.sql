@@ -33,3 +33,16 @@ WHERE days LIKE CONCAT('%',(
     AND 
     TIME(NOW()) > startTime
     AND TIME(NOW()) < endTime;
+
+-- Get All Rooms WITHOUT courses right Now
+SELECT * FROM nsccSchedule
+WHERE days LIKE CONCAT('%',(
+  SELECT dayChar
+  FROM daysLU
+  WHERE id = DAYOFWEEK(NOW())
+), '%')
+      AND
+      TIME(NOW()) > startTime
+      AND TIME(NOW()) < endTime;
+  -- take this result, do an outer join with list of classrooms
+  -- to find rooms without any class on at present.
