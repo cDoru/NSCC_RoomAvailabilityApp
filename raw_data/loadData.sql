@@ -1,3 +1,14 @@
+/*
+This is a SQL Script to run to load the flat text files
+into MySQL. Run this as needed to ensure that you are
+working against the latest database schema.
+
+This version is initial version created RS 20170108
+
+security Note: user and password used here should be changed before
+pushed to production as they are exposed here and are ROOT!!!!
+ */
+
 CREATE DATABASE IF NOT EXISTS nsccschedule;
 CONNECT nsccschedule;
 
