@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Author: Ryan Sutcliffe
+# Author: Ryan Sutcliffe CAPSTONE
 # Description: V1: Load nsccSchedule database objects into MySQL.
 # Notes: You might need to chmod 755 to file for it to run at first in terminal. 
 # Then just: sudo ./loadDatabase.sh 
