@@ -1,4 +1,6 @@
-/*Various SQL Queries to Analyze data */
+/*Various SQL Queries to Analyze data
+ this is the workspace of queries
+ */
 
 -- ensure that combination of fields returns unique ID
 SELECT count(course), course, sectionno,  term, component, deliveryId FROM RoomDelivery_TEMP
