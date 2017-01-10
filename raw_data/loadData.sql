@@ -43,7 +43,7 @@ CREATE TABLE CourseDelivery_TEMP (
 );
 
 LOAD DATA LOCAL INFILE 
-'Delivery_2016-11-06_19.01.00.txt' 
+'Delivery_2017-01-08_19.01.24.txt' 
 INTO TABLE CourseDelivery_TEMP
 (@row)
 SET faculty = TRIM(SUBSTR(@row,1,30)),
@@ -87,7 +87,7 @@ CREATE TABLE RoomDelivery_TEMP (
 );
 
 LOAD DATA LOCAL INFILE 
-'Delivery_Room_2016-11-06_19.01.00.txt' 
+'Delivery_Room_2017-01-08_19.01.24.txt' 
 INTO TABLE RoomDelivery_TEMP
 (@row)
 SET faculty = TRIM(SUBSTR(@row,1,30)),
