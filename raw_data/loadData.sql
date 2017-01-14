@@ -147,6 +147,22 @@ CREATE VIEW nsccSchedule AS
 			cd.component = rd.component and
 			cd.deliveryId = rd.deliveryId);
 
+-- New add Classroom table
+DROP TABLE IF EXISTS Rooms;
+CREATE TABLE Rooms (
+	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	campus VARCHAR(25) NOT NULL,
+	Building VARCHAR(3) NOT NULL,
+	Room VARCHAR(50) NOT NULL,
+	RoomType VARCHAR(25) NOT NULL
+);
+
+LOAD DATA LOCAL INFILE
+'roomList_2017-01-08.csv'
+		INTO TABLE Rooms
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(campus, Building, Room, RoomType);
 /*
 [todo:] Need to do something here to create a
 table of all the Classrooms
