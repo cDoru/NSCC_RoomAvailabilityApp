@@ -9,12 +9,18 @@ security Note: user and password used here should be changed before
 pushed to production as they are exposed here and are ROOT!!!!
  */
 
+
 CREATE DATABASE IF NOT EXISTS nsccschedule;
 CONNECT nsccschedule;
 
+-- this only works on mysql version 5.7.6 and above. we have 5.7.3
+/*
 CREATE USER IF NOT EXISTS 'root'@'localhost'
   IDENTIFIED BY 'inet2005';
-GRANT ALL PRIVILEGES ON nsccschedule TO 'root'@'localhost' WITH GRANT OPTION; 
+*/
+
+-- this instead.
+GRANT ALL PRIVILEGES ON nsccschedule TO 'root'@'localhost' IDENTIFIED BY 'inet2005'; 
 
 DROP TABLE IF EXISTS CourseDelivery_TEMP;
 
