@@ -8,8 +8,6 @@
 clear
 echo "Creating and Updating mySQL database"
 #connect to mysql
-mysql -u root -pinet2005
+mysql -u root -pinet2005 < loadData.sql
 
-#run sql script to load data
-source loadData.sql
 
