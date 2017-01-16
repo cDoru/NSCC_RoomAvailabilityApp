@@ -135,8 +135,8 @@ INSERT INTO daysLU VALUES
 INSERT INTO daysLU VALUES
 (7, 'S');
 
-DROP VIEW IF EXISTS nsccSchedule;
-CREATE VIEW nsccSchedule AS 
+DROP TABLE IF EXISTS nsccSchedule;
+CREATE TABLE nsccSchedule AS
   (SELECT cd.*, 
           rd.campus, 
           rd.building, 
