@@ -9,12 +9,18 @@ security Note: user and password used here should be changed before
 pushed to production as they are exposed here and are ROOT!!!!
  */
 
+
 CREATE DATABASE IF NOT EXISTS nsccschedule;
 CONNECT nsccschedule;
 
+-- this only works on mysql version 5.7.6 and above. we have 5.7.3
+/*
 CREATE USER IF NOT EXISTS 'root'@'localhost'
   IDENTIFIED BY 'inet2005';
-GRANT ALL PRIVILEGES ON nsccschedule TO 'root'@'localhost' WITH GRANT OPTION; 
+*/
+
+-- this instead.
+GRANT ALL PRIVILEGES ON nsccschedule TO 'root'@'localhost' IDENTIFIED BY 'inet2005'; 
 
 DROP TABLE IF EXISTS CourseDelivery_TEMP;
 
@@ -129,8 +135,8 @@ INSERT INTO daysLU VALUES
 INSERT INTO daysLU VALUES
 (7, 'S');
 
-DROP VIEW IF EXISTS nsccSchedule;
-CREATE VIEW nsccSchedule AS 
+DROP TABLE IF EXISTS nsccSchedule;
+CREATE TABLE nsccSchedule AS
   (SELECT cd.*, 
           rd.campus, 
           rd.building, 
@@ -147,6 +153,23 @@ CREATE VIEW nsccSchedule AS
 			cd.component = rd.component and
 			cd.deliveryId = rd.deliveryId);
 
+-- New add Classroom table
+DROP TABLE IF EXISTS Rooms;
+CREATE TABLE Rooms (
+	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	campus VARCHAR(25) NOT NULL,
+	Building VARCHAR(3) NOT NULL,
+	Room VARCHAR(50) NOT NULL,
+	RoomType VARCHAR(25) NOT NULL
+);
+
+LOAD DATA LOCAL INFILE
+'roomList_2017-01-08.csv'
+		INTO TABLE Rooms
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(campus, Building, Room, RoomType);
 /*
 [todo:] Need to do something here to create a
 table of all the Classrooms
