@@ -25,30 +25,43 @@
                     header: {
                         left: 'prev,next today ',
                         center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
+                        right: 'agendaWeek,agendaDay'
+                    },
+
+                    defaultView: 'agendaDay',
+
+                    events: [
+                        {
+                            title: 'Nick\'s Event',
+                            start: '2017-01-20T12:00:00',
+                            end: '2017-01-20T13:00:00',
+                            description: 'This is a cool event'
+                        }
+                        // more events here
+                    ],
+                    renderEvents: function(events, element) { //currently no qtip functionality installed
+                        element.qtip({
+                            content: events.description
+                        });
                     },
 
 
 
-                    dayClick: function(date, jsEvent, view) {
 
-                        alert('Clicked on: ' + date.format());
+                    eventClick: function(calEvent, jsEvent, view) {
 
+                        alert('Event Description: ' + calEvent.description);
                         alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                        alert('View: ' + view.name);
 
-                        alert('Current view: ' + view.name);
+                        // change the border color just for fun
+                        $(this).css('border-color', 'red');
 
-                        // change the day's background color just for fun
-                        $(this).css('background-color', 'red');
-                        $(this).text('Sample Data');
                     }
 
 
 
                 })
-
-
-
 
             });</script>
 
