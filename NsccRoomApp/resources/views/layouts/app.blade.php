@@ -55,9 +55,9 @@
 
 
 
-                    <li><a href="{{ url('/FreeRooms') }}">Find A Free Room</a></li>
+                    <li><a href="{{ url('/FreeRoom') }}">Find a Free Room</a></li>
                     <li><a href="{{ url('/RoomSchedule') }}">Room Schedule</a></li>
-                    <li><a href="{{ url('/Locate') }}">Locate A Room</a></li>
+                    <li><a href="{{ url('/Locate') }}">Locate a Room</a></li>
 
 
 

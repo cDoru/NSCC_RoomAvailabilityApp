@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/','HomeController');
+
+Route::resource('/FreeRoom','FreeRoomController');
+
+Route::resource('/RoomSchedule','RoomController');
+
+Route::resource('/Locate','LocateController');
