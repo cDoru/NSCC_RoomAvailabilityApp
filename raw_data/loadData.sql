@@ -175,3 +175,26 @@ IGNORE 1 LINES
 table of all the Classrooms
 so we can find classrooms WITHOUT classes
  */
+
+
+DROP PROCEDURE IF EXISTS GetFreeRoomsNow;
+DELIMITER //
+CREATE PROCEDURE GetFreeRoomsNow()
+  BEGIN
+      SELECT DISTINCT room FROM nsccSchedule
+      WHERE room NOT IN(
+        SELECT DISTINCT room FROM nsccSchedule
+        WHERE days LIKE CONCAT('%',(
+          SELECT dayChar
+          FROM daysLU
+          WHERE id = DAYOFWEEK(NOW())
+          ), '%')
+        AND
+          (TIME(NOW()) > startTime
+          AND TIME(NOW()) < endTime)
+        AND
+          (DATE(NOW()) > startDate
+          AND DATE(NOW()) < endDate)
+      );
+  END //
+DELIMITER ;
