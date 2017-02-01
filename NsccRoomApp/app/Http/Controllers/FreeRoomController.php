@@ -21,8 +21,9 @@ class FreeRoomController extends Controller
         $building = null;
         $roomtype = null;
         $matchingRooms = null;
+        $selectedRoomType = null;
         $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
-        return view('FreeRoom', compact('campus', 'building', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms'));
+        return view('FreeRoom', compact('campus', 'building', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms', 'selectedRoomType'));
     }
 
     /**
@@ -50,6 +51,7 @@ class FreeRoomController extends Controller
             $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
             $roomtype = null;
             $matchingRooms = null;
+            $selectedRoomType = null;
             $selectedCampus = $request->campus;
             $building = DB::table('nsccSchedule')->select('building')->where('campus', '=', $request->campus)->groupBy('building')->get();
 
@@ -60,14 +62,14 @@ class FreeRoomController extends Controller
                 
                 if($request->roomtype != null)
                 {
-                    $selectedRoomtype = $request->roomtype;
-                    $matchingRooms = DB::table('Rooms')->select('Room')->where('campus', '=', $selectedCampus)->where('Building', '=', $selectedBuilding)->where('RoomType', '=', $selectedRoomtype)->groupBy('Room')->get();
+                    $selectedRoomType = $request->roomtype;
+                    $matchingRooms = DB::table('Rooms')->select('Room')->where('campus', '=', $selectedCampus)->where('Building', '=', $selectedBuilding)->where('RoomType', '=', $selectedRoomType)->groupBy('Room')->get();
+                    
                 }
                 
             }
 
-
-            return view('FreeRoom', compact('building', 'campus', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms'));
+            return view('FreeRoom', compact('building', 'campus', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms', 'selectedRoomType'));
         }
         //in the view, hide the select boxes instead of only creating them when needed...
         //send thru data from all boxes each time.

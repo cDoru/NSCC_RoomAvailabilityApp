@@ -16,6 +16,13 @@
             });
         });
 
+        $(document).ready(function(){
+            $('#roomtype').change(function(){
+                myform.submit();
+            });
+        });
+
+
     </script>
 
 
@@ -84,18 +91,40 @@
                         {
                             foreach($roomtype as $r)
                             {
+                                if($r->RoomType == $selectedRoomType){
+                                    echo "<option selected='selected' value='".$r->RoomType."'>".$r->RoomType."</option>";
+                                }
+                                else{
                                     echo "<option value='".$r->RoomType."'>".$r->RoomType."</option>";
+                                }
                             }
                         }
                         ?>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
             </form>
         </div>
+
+
+        <?php
+            if($matchingRooms != null){
+        ?>
+
+
+        NOTE: THESE ARE NOT ACTUALLY THE AVAILABLE ROOMS...
+        <div class="row">
+            <table>
+                <tr><th>Available Rooms</th></tr>
+                <?php
+                    foreach($matchingRooms as $m){
+                ?>
+                <tr><td><?php echo $m->Room ?></td></tr>
+                <?php } ?>
+            </table>
+        </div>
+
+        <?php } ?>
+
     </div>
 
 @endsection
