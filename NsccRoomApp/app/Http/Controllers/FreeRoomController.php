@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 
 class FreeRoomController extends Controller
 {
@@ -15,7 +16,13 @@ class FreeRoomController extends Controller
      */
     public function index()
     {
-        return view('FreeRoom');
+        $selectedCampus = null;
+        $selectedBuilding = null;
+        $building = null;
+        $roomtype = null;
+        $matchingRooms = null;
+        $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
+        return view('FreeRoom', compact('campus', 'building', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms'));
     }
 
     /**
@@ -36,7 +43,34 @@ class FreeRoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        if($request->campus != null)
+        {
+            $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
+            $roomtype = null;
+            $matchingRooms = null;
+            $selectedCampus = $request->campus;
+            $building = DB::table('nsccSchedule')->select('building')->where('campus', '=', $request->campus)->groupBy('building')->get();
+
+            if($request->building != null)
+            {
+                $selectedBuilding = $request->building;
+                $roomtype = DB::table('Rooms')->select('RoomType')->where('campus', '=', $selectedCampus)->where('Building', '=', $selectedBuilding)->groupBy('RoomType')->get();
+                
+                if($request->roomtype != null)
+                {
+                    $selectedRoomtype = $request->roomtype;
+                    $matchingRooms = DB::table('Rooms')->select('Room')->where('campus', '=', $selectedCampus)->where('Building', '=', $selectedBuilding)->where('RoomType', '=', $selectedRoomtype)->groupBy('Room')->get();
+                }
+                
+            }
+
+
+            return view('FreeRoom', compact('building', 'campus', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms'));
+        }
+        //in the view, hide the select boxes instead of only creating them when needed...
+        //send thru data from all boxes each time.
     }
 
     /**
