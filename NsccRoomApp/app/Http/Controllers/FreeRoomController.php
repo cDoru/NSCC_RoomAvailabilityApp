@@ -22,8 +22,9 @@ class FreeRoomController extends Controller
         $roomtype = null;
         $matchingRooms = null;
         $selectedRoomType = null;
+        $matchingFreeRooms = null;
         $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
-        return view('FreeRoom', compact('campus', 'building', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms', 'selectedRoomType'));
+        return view('FreeRoom', compact('campus', 'building', 'roomtype', 'selectedCampus', 'selectedBuilding', 'selectedRoomType', 'matchingFreeRooms'));
     }
 
     /**
@@ -52,6 +53,7 @@ class FreeRoomController extends Controller
             $roomtype = null;
             $matchingRooms = null;
             $selectedRoomType = null;
+            $matchingFreeRooms = null;
             $selectedCampus = $request->campus;
             $building = DB::table('nsccSchedule')->select('building')->where('campus', '=', $request->campus)->groupBy('building')->get();
 
@@ -64,12 +66,29 @@ class FreeRoomController extends Controller
                 {
                     $selectedRoomType = $request->roomtype;
                     $matchingRooms = DB::table('Rooms')->select('Room')->where('campus', '=', $selectedCampus)->where('Building', '=', $selectedBuilding)->where('RoomType', '=', $selectedRoomType)->groupBy('Room')->get();
-                    
+                    $freeRooms = DB::select('CALL `nsccschedule`.`GetFreeRoomsNow`();');
+
+                    $y = array();
+                    $z = array();
+
+                    foreach($matchingRooms as $m)
+                    {
+                        $y[] = $m->Room;
+                    }
+
+                    foreach($freeRooms as $f)
+                    {
+                        $z[] = $f->room;
+                    }
+
+
+                    $matchingFreeRooms = array_intersect($y, $z);
+
                 }
                 
             }
 
-            return view('FreeRoom', compact('building', 'campus', 'roomtype', 'selectedCampus', 'selectedBuilding', 'matchingRooms', 'selectedRoomType'));
+            return view('FreeRoom', compact('building', 'campus', 'roomtype', 'selectedCampus', 'selectedBuilding', 'selectedRoomType', 'matchingFreeRooms'));
         }
         //in the view, hide the select boxes instead of only creating them when needed...
         //send thru data from all boxes each time.

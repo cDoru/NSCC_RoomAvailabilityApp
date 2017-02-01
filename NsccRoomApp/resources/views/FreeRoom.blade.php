@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="campus">Campus</label>
                         <select name="campus" id="campus" class="form-control">
-                            <option value="0"></option>
+                            <option value="0">&#60;Select Your Campus&#62;</option>
                             <?php if(is_array($campus))
                             {
                                 foreach($campus as $c)
@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <label for="building">Building</label>
                     <select name="building" id="building" class="form-control">
-                        <option value="0"></option>
+                        <option value="0">&#60;Select A Building&#62;</option>
                         <?php
                             if(is_array($building))
                             {
@@ -85,7 +85,7 @@
                 <div class="form-group">
                     <label for="roomtype">Room Type</label>
                     <select name="roomtype" id="roomtype" class="form-control">
-                        <option value="0"></option>
+                        <option value="0">&#60;Select A Room Type&#62;</option>
                         <?php
                         if(is_array($roomtype))
                         {
@@ -106,24 +106,31 @@
         </div>
 
 
+
+
+
+
+
+
         <?php
-            if($matchingRooms != null){
+        if($matchingFreeRooms != null){
         ?>
 
 
-        NOTE: THESE ARE NOT ACTUALLY THE AVAILABLE ROOMS...
         <div class="row">
             <table>
-                <tr><th>Available Rooms</th></tr>
+                <tr><th>Free Rooms Matching Your Criteria</th></tr>
                 <?php
-                    foreach($matchingRooms as $m){
+                foreach($matchingFreeRooms as $f){
                 ?>
-                <tr><td><?php echo $m->Room ?></td></tr>
+                <tr><td><?php echo $f ?></td></tr>
                 <?php } ?>
             </table>
         </div>
 
         <?php } ?>
+
+
 
     </div>
 
