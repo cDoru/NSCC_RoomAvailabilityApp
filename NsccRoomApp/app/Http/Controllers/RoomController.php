@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use DB;
+
 
 
 class RoomController extends Controller
@@ -17,7 +19,15 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return view('RoomSchedule');
+        $selectedCampus = null;
+        $selectedBuilding = null;
+        $building = null;
+        $rooms = null;
+        $matchingRooms = null;
+        $selectedRoom = null;
+        $matchingFreeRooms = null;
+        $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
+        return view('RoomSchedule', compact('campus', 'building', 'rooms', 'selectedCampus', 'selectedBuilding', 'selectedRoom', 'matchingFreeRooms'));
     }
 
     /**
@@ -38,7 +48,25 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->campus != null)
+        {
+            $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
+            $rooms = null;
+            $matchingRooms = null;
+            $selectedRoom = null;
+            $matchingFreeRooms = null;
+            $selectedCampus = $request->campus;
+            $building = DB::table('nsccSchedule')->select('building')->where('campus', '=', $request->campus)->groupBy('building')->get();
+
+            if($request->building != null)
+            {
+                $selectedBuilding = $request->building;
+                $rooms = DB::table('nsccSchedule')->select('room')->where('campus', '=', $selectedCampus)->where('building', '=', $selectedBuilding)->groupBy('room')->get();
+
+            }
+
+            return view('RoomSchedule', compact('building', 'campus', 'rooms', 'selectedCampus', 'selectedBuilding', 'selectedRoom', 'matchingFreeRooms'));
+        }
     }
 
     /**

@@ -128,7 +128,9 @@
             </table>
         </div>
 
-        <?php } ?>
+        <?php
+        }elseif(!empty($selectedRoomType) && empty($matchingFreeRooms)){echo "<p><strong>No free rooms matching your criteria</strong></p>";}
+        ?>
 
 
 
