@@ -31,7 +31,7 @@
         <div class="row">
             <h1>NSCC Room Availability App</h1>
             <h3>Find a free room</h3>
-            <form action="" method="post" name="myform">
+            <form method="post" name="myform" id="myform">
                 {{ csrf_field() }}
 
 
@@ -135,5 +135,7 @@
 
 
     </div>
+
+
 
 @endsection

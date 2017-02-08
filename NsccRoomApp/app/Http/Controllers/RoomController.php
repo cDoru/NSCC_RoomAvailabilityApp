@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use DB;
 
+use App\Event;
+
 
 
 class RoomController extends Controller
@@ -75,9 +77,30 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($roomNum)
     {
-        //
+        $bookings = DB::table('nsccSchedule')->select('course', 'startDate', 'endDate', 'days', 'startTime', 'endTime', 'deliveryDesc')->where('room', '=', $roomNum)->get();
+
+        $eventArray = array();
+
+        foreach($bookings as $b)
+        {
+
+
+            if(str_contains($b->days, 'M'))
+            {
+                $endDate = strtotime($b->endDate);
+                for($i = strtotime('Monday', strtotime($b->startDate)); $i <= $endDate; $i = strtotime('+1 week', $i))
+                {
+                    $event = new Event($b->course, date('Y-m-d',$i).'T'.$b->startTime, date('Y-m-d',$i).'T'.$b->endTime, $b->deliveryDesc);
+                    $eventArray[] = $event;
+                }
+
+            }
+            
+
+        }
+        return view('Calendar', compact('eventArray'));
     }
 
     /**
