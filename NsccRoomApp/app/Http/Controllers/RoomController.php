@@ -79,7 +79,7 @@ class RoomController extends Controller
      */
     public function show($roomNum)
     {
-        $bookings = DB::table('nsccSchedule')->select('course', 'startDate', 'endDate', 'days', 'startTime', 'endTime', 'deliveryDesc')->where('room', '=', $roomNum)->get();
+        $bookings = DB::table('nsccSchedule')->distinct()->select('course', 'startDate', 'endDate', 'days', 'startTime', 'endTime', 'deliveryDesc')->where('room', '=', $roomNum)->get();
 
         $eventArray = array();
 
@@ -97,10 +97,54 @@ class RoomController extends Controller
                 }
 
             }
+
+            if(str_contains($b->days, 'T'))
+            {
+                $endDate = strtotime($b->endDate);
+                for($i = strtotime('Tuesday', strtotime($b->startDate)); $i <= $endDate; $i = strtotime('+1 week', $i))
+                {
+                    $event = new Event($b->course, date('Y-m-d',$i).'T'.$b->startTime, date('Y-m-d',$i).'T'.$b->endTime, $b->deliveryDesc);
+                    $eventArray[] = $event;
+                }
+
+            }
+
+            if(str_contains($b->days, 'W'))
+            {
+                $endDate = strtotime($b->endDate);
+                for($i = strtotime('Wednesday', strtotime($b->startDate)); $i <= $endDate; $i = strtotime('+1 week', $i))
+                {
+                    $event = new Event($b->course, date('Y-m-d',$i).'T'.$b->startTime, date('Y-m-d',$i).'T'.$b->endTime, $b->deliveryDesc);
+                    $eventArray[] = $event;
+                }
+
+            }
+
+            if(str_contains($b->days, 'R'))
+            {
+                $endDate = strtotime($b->endDate);
+                for($i = strtotime('Thursday', strtotime($b->startDate)); $i <= $endDate; $i = strtotime('+1 week', $i))
+                {
+                    $event = new Event($b->course, date('Y-m-d',$i).'T'.$b->startTime, date('Y-m-d',$i).'T'.$b->endTime, $b->deliveryDesc);
+                    $eventArray[] = $event;
+                }
+
+            }
+
+            if(str_contains($b->days, 'F'))
+            {
+                $endDate = strtotime($b->endDate);
+                for($i = strtotime('Friday', strtotime($b->startDate)); $i <= $endDate; $i = strtotime('+1 week', $i))
+                {
+                    $event = new Event($b->course, date('Y-m-d',$i).'T'.$b->startTime, date('Y-m-d',$i).'T'.$b->endTime, $b->deliveryDesc);
+                    $eventArray[] = $event;
+                }
+
+            }
             
 
         }
-        return view('Calendar', compact('eventArray'));
+        return view('Calendar', compact('eventArray', 'roomNum'));
     }
 
     /**

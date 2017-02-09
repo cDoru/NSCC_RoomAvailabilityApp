@@ -21,10 +21,12 @@
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
                 header: {
-                    left: 'prev,next today ',
+                    left: 'today prev,next',
                     center: 'title',
                     right: 'agendaWeek,agendaDay'
                 },
+
+                titleFormat: '[<?php echo $roomNum ?>]'+' | '+'MMMM D YYYY',
 
                 defaultView: 'agendaDay',
 
@@ -33,10 +35,10 @@
                         <?php
                         foreach($eventArray as $e){ ?>
                         {
-                            title: '<?php echo $e->title; ?>',
+                            title: '<?php echo $e->title.'\n'.preg_replace('/[\']/', '`',$e->description); ?>',
                             start: '<?php echo $e->start; ?>',
                             end: '<?php echo $e->end; ?>',
-                            description: '<?php echo $e->description; ?>'
+                            description: ''
                         },
                             <?php } ?>
 
@@ -54,16 +56,16 @@
 //                    });
 //                },
 
-                eventClick: function(calEvent, jsEvent, view) {
-
-                    alert('Event Description: ' + calEvent.description);
-                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                    alert('View: ' + view.name);
-
-                    // change the border color just for fun
-                    $(this).css('border-color', 'red');
-
-                }
+//                eventClick: function(calEvent, jsEvent, view) {
+//
+//                    alert('Event Description: ' + calEvent.description);
+//                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+//                    alert('View: ' + view.name);
+//
+//                    // change the border color just for fun
+//                    $(this).css('border-color', 'red');
+//
+//                }
 
 
 
