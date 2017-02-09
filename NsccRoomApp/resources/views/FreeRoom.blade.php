@@ -123,7 +123,7 @@
                 <?php
                 foreach($matchingFreeRooms as $f){
                 ?>
-                <tr><td><?php echo $f ?></td></tr>
+                <tr><td><a href="/RoomSchedule/<?php echo $f?>"><?php echo $f ?></a></td></tr>
                 <?php } ?>
             </table>
         </div>

@@ -14,11 +14,11 @@
             });
         });
 
-//        $(document).ready(function(){
-//            $('#roomtype').change(function(){
-//                myform.submit();
-//            });
-//        });
+        $(document).ready(function(){
+            $('#rooms').change(function(){
+                myform.submit();
+            });
+        });
 
 
     </script>
@@ -28,7 +28,7 @@
     <div class="container col-md-6 col-md-offset-3">
         <div class="row">
             <h1>NSCC Room Availability App</h1>
-            <h3>Find a free room</h3>
+            <h3>Find a room's schedule</h3>
             <form action="" method="post" name="myform">
                 {{ csrf_field() }}
 
@@ -81,7 +81,7 @@
 
 
                 <div class="form-group">
-                    <label for="roomtype">Room</label>
+                    <label for="rooms">Room</label>
                     <select name="rooms" id="rooms" class="form-control">
                         <option value="0">&#60;Select A Room&#62;</option>
                         <?php
