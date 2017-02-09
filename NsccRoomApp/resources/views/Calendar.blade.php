@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+@extends('layouts.app')
+
+@section('calendar')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +26,7 @@
                     right: 'agendaWeek,agendaDay'
                 },
 
-                titleFormat: '[<?php echo $roomNum ?>]'+' | '+'MMMM D YYYY',
+                titleFormat: '[<?php echo $roomNum ?>]'+' | '+'MMMM D, YYYY',
 
                 defaultView: 'agendaDay',
 
@@ -73,9 +73,8 @@
 
         });</script>
 
-</head>
-<body>
-<div id='calendar'></div>
-</body>
+@endsection
 
-</html>
+@section('content')
+<div id='calendar'></div>
+@endsection
