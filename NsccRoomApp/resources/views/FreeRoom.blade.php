@@ -8,15 +8,11 @@
             $('#campus').change(function(){
                 myform.submit();
             });
-        });
 
-        $(document).ready(function(){
             $('#building').change(function(){
                 myform.submit();
             });
-        });
 
-        $(document).ready(function(){
             $('#roomtype').change(function(){
                 myform.submit();
             });
