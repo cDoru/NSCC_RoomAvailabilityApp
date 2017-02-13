@@ -21,6 +21,7 @@ class RoomController extends Controller
      */
     public function index()
     {
+        //dd("got here");
         $selectedCampus = null;
         $selectedBuilding = null;
         $building = null;
@@ -79,7 +80,8 @@ class RoomController extends Controller
      */
     public function show($roomNum)
     {
-        $bookings = DB::table('nsccSchedule')->distinct()->select('course', 'startDate', 'endDate', 'days', 'startTime', 'endTime', 'deliveryDesc')->where('room', '=', $roomNum)->get();
+        $bookings = DB::table('nsccSchedule')->distinct()->select('course', 'startDate',
+            'endDate', 'days', 'startTime', 'endTime', 'deliveryDesc')->where('room', '=', $roomNum)->get();
 
         $eventArray = array();
 

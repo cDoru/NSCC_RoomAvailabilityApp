@@ -16,6 +16,7 @@ class FreeRoomController extends Controller
      */
     public function index()
     {
+        
         $selectedCampus = null;
         $selectedBuilding = null;
         $building = null;
@@ -24,18 +25,10 @@ class FreeRoomController extends Controller
         $selectedRoomType = null;
         $matchingFreeRooms = null;
         $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
-        return view('FreeRoom', compact('campus', 'building', 'roomtype', 'selectedCampus', 'selectedBuilding', 'selectedRoomType', 'matchingFreeRooms'));
+        return view('FreeRoom', compact('campus', 'building', 'roomtype', 
+            'selectedCampus', 'selectedBuilding', 'selectedRoomType', 'matchingFreeRooms'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
