@@ -95,6 +95,7 @@
 
 <!-- referenced by FreeRoom.blade.php so needs to load first -->
 <script src="{{ asset('js/appUI.js') }}"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
 <!-- JavaScripts (twitter requires older version of jquery)-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"
         integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb"

@@ -32,6 +32,8 @@ class FreeRoomController extends Controller
 
     /**
      * NEW: function to return raw data from database
+     * of Available rooms
+     * 
      * Returns: Objects of relevant rooms
      * called directly by jquery ajax requests
      * or indirectly by other controller methods

@@ -54,7 +54,10 @@ $(document).ready(function(){
                 if(this.RoomType == prevRoomType){
                     $roomTypeDropdown.append($("<option selected='selected'/>").val(this.RoomType).text(this.RoomType));
                 }
-                $roomTypeDropdown.append($("<option />").val(this.RoomType).text(this.RoomType));
+                else {
+                    $roomTypeDropdown.append($("<option />").val(this.RoomType).text(this.RoomType));
+                }
+
             });
 
             return $roomTypeDropdown.val();
@@ -85,15 +88,17 @@ $(document).ready(function(){
 
     function formUpdate(campus, building, roomType, filter){
         //called when all form items are populated and ready to fetch room data
-
+        
         //get form element values
-        $.post("/FreeRoom/roomData", { campus: campus, building: building,
-                roomType: roomType, filter: filter },
-            function(result){
-                alert("returning ajax call. Have a look at the result variable to figure out what you're getting");
-                $("#table").html(result);
-            });
+        $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + roomType, function(result){
+            
+            $roomTypesObj = JSON.parse(result);
+            $("#roomstable").html($roomTypesObj);
+            
+            //[todo] need to call Vue HTML component here to load table with data
+        });
     }
+    
 
 
 });
