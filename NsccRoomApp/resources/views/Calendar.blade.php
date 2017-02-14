@@ -8,9 +8,9 @@
     <title>Calendar Prototype</title>
 
     <link rel='stylesheet' href='/css/fullcalendar.css' />
-    <script src='/js/jquery.min.js'></script>
-    <script src='/js/moment.min.js'></script>
-    <script src='/js/fullcalendar.js'></script>
+    <script src='{{asset('/js/jquery.min.js')}}'></script>
+    <script src='{{asset('/js/moment.min.js')}}'></script>
+    <script src='{{asset('/js/fullcalendar.js')}}'></script>
 
 
 

@@ -16,7 +16,7 @@ class FreeRoomController extends Controller
      */
     public function index()
     {
-        
+
         $selectedCampus = null;
         $selectedBuilding = null;
         $building = null;
@@ -24,12 +24,50 @@ class FreeRoomController extends Controller
         $matchingRooms = null;
         $selectedRoomType = null;
         $matchingFreeRooms = null;
-        $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
-        return view('FreeRoom', compact('campus', 'building', 'roomtype', 
-            'selectedCampus', 'selectedBuilding', 'selectedRoomType', 'matchingFreeRooms'));
+        $buildingsList = DB::table('BuildingsLU')->orderBy('campus')->orderBy('building')->get();
+        
+        return view('FreeRoom', compact('selectedCampus', 'selectedBuilding',
+            'roomtype', 'matchingRooms', 'selectedRoomType', 'matchingFreeRooms', 'buildingsList'));
     }
 
+    /**
+     * NEW: function to return raw data from database
+     * Returns: Objects of relevant rooms
+     * called directly by jquery ajax requests
+     * or indirectly by other controller methods
+     * maybe this should be in a model
+     * @param Request $request
+     */
+   
+    public function retrieveRoomData(Request $request){
+        $campus = $request->campus;
+        $building = $request->building;
+        $roomType = $request->roomtype;
+        $roomFilter = $request->roomfilter;
+        
+        $matchingRooms = DB::table('Rooms')->select('Room')
+            ->where('campus', '=', $campus)
+            ->where('Building', '=', $building)
+            ->where('RoomType', '=', $roomType)
+            ->groupBy('Room')->get();
 
+        $freeRooms = DB::select('CALL `nsccschedule`.`GetFreeRoomsNow`();');
+
+        $y = array();
+        $z = array();
+
+        foreach($matchingRooms as $m) {
+            $y[] = $m->Room;
+        }
+
+        foreach($freeRooms as $f) {
+            $z[] = $f->room;
+        }
+
+        $matchingFreeRooms = array_intersect($y, $z);
+        return $matchingFreeRooms;
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -58,7 +96,11 @@ class FreeRoomController extends Controller
                 if($request->roomtype != null)
                 {
                     $selectedRoomType = $request->roomtype;
-                    $matchingRooms = DB::table('Rooms')->select('Room')->where('campus', '=', $selectedCampus)->where('Building', '=', $selectedBuilding)->where('RoomType', '=', $selectedRoomType)->groupBy('Room')->get();
+                    $matchingRooms = DB::table('Rooms')->select('Room')
+                        ->where('campus', '=', $selectedCampus)
+                        ->where('Building', '=', $selectedBuilding)
+                        ->where('RoomType', '=', $selectedRoomType)
+                        ->groupBy('Room')->get();
                     $freeRooms = DB::select('CALL `nsccschedule`.`GetFreeRoomsNow`();');
 
                     $y = array();
@@ -86,7 +128,7 @@ class FreeRoomController extends Controller
         //in the view, hide the select boxes instead of only creating them when needed...
         //send thru data from all boxes each time.
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -97,38 +139,5 @@ class FreeRoomController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

@@ -13,7 +13,29 @@
 
 Route::resource('/','HomeController');
 
-Route::resource('/FreeRoom','FreeRoomController');
+
+
+Route::post('FreeRoom/roomData', 'FreeRoomController@retrieveRoomData'); //handles ajax calls for free rooms
+
+Route::get('FreeRoom/roomTypeData/{building}', function($building) {
+    //'FreeRoomController@retrieveRoomTypeData'
+    $roomTypes = \DB::table('Rooms')
+        ->select('RoomType')
+        ->where('Building','=', $building)
+        ->distinct()->get();
+
+    return json_encode($roomTypes);
+}); //handles ajax calls for roomtype data
+
+Route::get('FreeRoom/helloworld/{id}', function ($id) {
+    return 'Hello World' . $id;
+});
+
+Route::resource('/FreeRoom','FreeRoomController', ['only' => [
+    'index', 'show', 'store'
+]]);
+
+Route::post('FreeRoom/buildingList', 'FreeRoomController@retrieveBuildingList');
 
 Route::resource('/RoomSchedule','RoomController');
 

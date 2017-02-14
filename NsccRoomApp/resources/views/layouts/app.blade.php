@@ -64,8 +64,6 @@
 
 
 
-
-
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -95,18 +93,20 @@
 
 @yield('content')
 
+<!-- referenced by FreeRoom.blade.php so needs to load first -->
+<script src="{{ asset('js/appUI.js') }}"></script>
 <!-- JavaScripts (twitter requires older version of jquery)-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"
         integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb"
         crossorigin="anonymous">
-
 </script>
+<script>window.jQuery || document.write('<script src="{{asset('/js/jquery.min.js')}}"">\x3C/script>')</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous">
         //need to add local hosted fallover option if itegrity check fails
-        //window.jQuery || /* reload from own domain here */;
+
 </script>
 @yield('calendar')
 </body>
