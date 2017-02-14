@@ -176,6 +176,14 @@ table of all the Classrooms
 so we can find classrooms WITHOUT classes
  */
 
+-- NEW: Create Buildings/Campus Lookup
+DROP TABLE IF EXISTS BuildingsLU;
+CREATE TABLE BuildingsLU AS
+	(
+		SELECT DISTINCT campus, building
+		FROM nsccSchedule
+		WHERE building <> 'CUSTOMER'
+	);
 
 DROP PROCEDURE IF EXISTS GetFreeRoomsNow;
 DELIMITER //
