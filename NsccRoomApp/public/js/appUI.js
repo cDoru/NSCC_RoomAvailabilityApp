@@ -10,18 +10,20 @@
 
 $(document).ready(function(){
     //LOAD PAGE ACTION
-
+    if($buildingsObj){
     //get a list of campuses (indexOf not supported in IE8?)
-    $campusesList = [];
-    for (var i = 0; i < $buildingsObj.length; i++) {
-        if ($campusesList.indexOf($buildingsObj[i].campus) ==-1){
-            $campusesList.push($buildingsObj[i].campus)
+        $campusesList = [];
+        for (var i = 0; i < $buildingsObj.length; i++) {
+            if ($campusesList.indexOf($buildingsObj[i].campus) ==-1){
+                $campusesList.push($buildingsObj[i].campus)
+            }
         }
+        //populate campus list
+        $.each($campusesList, function() {
+            $("#campus").append($("<option />").val(this).text(this));
+        });
     }
-    //populate campus list
-    $.each($campusesList, function() {
-        $("#campus").append($("<option />").val(this).text(this));
-    });
+
 
     //FORM ELEMENT CHANGE ACTION
     /*
@@ -93,9 +95,23 @@ $(document).ready(function(){
         $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + roomType, function(result){
             
             $roomTypesObj = JSON.parse(result);
-            $("#roomstable").html($roomTypesObj);
-            
+            //$("#roomstable").html(result);
+
             //[todo] need to call Vue HTML component here to load table with data
+            //[todo] fix link: https://vuejs.org/v2/guide/syntax.html
+            Vue.component('todo-item', {
+                props: ['todo'],
+                template: '<tr><td><a href="/RoomSchedule/">{{ todo.Room }}</a></tr></td>'
+            })
+            "'/path/to/images/' + fileName"
+            var app7 = new Vue({
+                el: '#app-7',
+                data: {
+                    rooms:  $roomTypesObj
+                }
+            })
+
+
         });
     }
     

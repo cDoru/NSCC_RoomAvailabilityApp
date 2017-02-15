@@ -46,8 +46,16 @@ class FreeRoomController extends Controller
         $building = $request->building;
         $roomType = $request->roomtype;
         $roomFilter = $request->roomfilter;
-        
+
         $matchingRooms = DB::table('Rooms')->select('Room')
+            ->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
+            ->where('campus', '=', $campus)
+            ->where('Building', '=', $building)
+            ->where('RoomType', '=', $roomType)
+            ->groupBy('Room')->get();
+
+        $matchingRooms1 = DB::table('Rooms')->select('Room')
+            //->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
             ->where('campus', '=', $campus)
             ->where('Building', '=', $building)
             ->where('RoomType', '=', $roomType)
@@ -67,7 +75,7 @@ class FreeRoomController extends Controller
         }
 
         $matchingFreeRooms = array_intersect($y, $z);
-        return $matchingFreeRooms;
+        return $matchingRooms1;
     }
     
     /**

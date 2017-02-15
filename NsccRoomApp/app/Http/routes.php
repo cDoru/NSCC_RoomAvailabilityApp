@@ -45,6 +45,12 @@ Route::get('FreeRoom/roomData/{campus}/{building}/{roomType?}/{filter?}',
                 ->where('campus', '=', $campus)
                 ->where('Building', '=', $building)
                 ->groupBy('Room')->get();
+
+            $matchingRooms1 = DB::table('Rooms')->select('Rooms.Room')
+                ->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
+                ->where('Rooms.campus', '=', $campus)
+                ->where('Rooms.Building', '=', $building)
+                ->groupBy('Rooms.Room')->get();
         }
         $freeRooms = DB::select('CALL `nsccschedule`.`GetFreeRoomsNow`();');
         
@@ -60,7 +66,7 @@ Route::get('FreeRoom/roomData/{campus}/{building}/{roomType?}/{filter?}',
         }
 
         $matchingFreeRooms = array_intersect($y, $z);
-        return json_encode($matchingFreeRooms);
+        return json_encode($matchingRooms1); //$matchingFreeRooms;
 
 }); //handles ajax calls for free rooms
 
@@ -74,13 +80,10 @@ Route::get('FreeRoom/roomTypeData/{building}', function($building) {
     return json_encode($roomTypes);
 }); //handles ajax calls for roomtype data
 
-Route::get('FreeRoom/helloworld/{id}', function ($id) {
-    return 'Hello World' . $id;
-});
 
-Route::resource('/FreeRoom','FreeRoomController', ['only' => [
-    'index', 'show', 'store'
-]]);
+Route::resource('/FreeRoom','FreeRoomController'
+    ,  ['only' => ['index', 'show', 'store']]
+);
 
 Route::post('FreeRoom/buildingList', 'FreeRoomController@retrieveBuildingList');
 

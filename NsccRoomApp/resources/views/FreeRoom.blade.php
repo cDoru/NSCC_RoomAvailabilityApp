@@ -42,6 +42,14 @@
         <div id="roomstable">
 
         </div>
-    </div>
+
+        <div id="app-7">
+            <table>
+                <tr><th>Free Rooms Matching Your Criteria</th></tr>
+                <!-- Now we provide each todo-item with the todo object    -->
+                <!-- it's representing, so that its content can be dynamic -->
+                <todo-item v-for="item in rooms" v-bind:todo="item"></todo-item>
+            </table>
+        </div>
 
 @endsection
