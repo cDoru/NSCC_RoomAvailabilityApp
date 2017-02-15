@@ -16,6 +16,7 @@ class FreeRoomController extends Controller
      */
     public function index()
     {
+
         $selectedCampus = null;
         $selectedBuilding = null;
         $building = null;
@@ -23,20 +24,13 @@ class FreeRoomController extends Controller
         $matchingRooms = null;
         $selectedRoomType = null;
         $matchingFreeRooms = null;
-        $campus = DB::table('nsccSchedule')->select('campus')->groupBy('campus')->get();
-        return view('FreeRoom', compact('campus', 'building', 'roomtype', 'selectedCampus', 'selectedBuilding', 'selectedRoomType', 'matchingFreeRooms'));
+        $buildingsList = DB::table('BuildingsLU')->orderBy('campus')->orderBy('building')->get();
+        
+        return view('FreeRoom', compact('selectedCampus', 'selectedBuilding',
+            'roomtype', 'matchingRooms', 'selectedRoomType', 'matchingFreeRooms', 'buildingsList'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -65,7 +59,11 @@ class FreeRoomController extends Controller
                 if($request->roomtype != null)
                 {
                     $selectedRoomType = $request->roomtype;
-                    $matchingRooms = DB::table('Rooms')->select('Room')->where('campus', '=', $selectedCampus)->where('Building', '=', $selectedBuilding)->where('RoomType', '=', $selectedRoomType)->groupBy('Room')->get();
+                    $matchingRooms = DB::table('Rooms')->select('Room')
+                        ->where('campus', '=', $selectedCampus)
+                        ->where('Building', '=', $selectedBuilding)
+                        ->where('RoomType', '=', $selectedRoomType)
+                        ->groupBy('Room')->get();
                     $freeRooms = DB::select('CALL `nsccschedule`.`GetFreeRoomsNow`();');
 
                     $y = array();
@@ -93,7 +91,7 @@ class FreeRoomController extends Controller
         //in the view, hide the select boxes instead of only creating them when needed...
         //send thru data from all boxes each time.
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -104,38 +102,5 @@ class FreeRoomController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
