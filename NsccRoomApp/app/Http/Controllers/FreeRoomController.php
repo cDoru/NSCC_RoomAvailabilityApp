@@ -30,53 +30,6 @@ class FreeRoomController extends Controller
             'roomtype', 'matchingRooms', 'selectedRoomType', 'matchingFreeRooms', 'buildingsList'));
     }
 
-    /**
-     * NEW: function to return raw data from database
-     * of Available rooms
-     * 
-     * Returns: Objects of relevant rooms
-     * called directly by jquery ajax requests
-     * or indirectly by other controller methods
-     * maybe this should be in a model
-     * @param Request $request
-     */
-   
-    public function retrieveRoomData(Request $request){
-        $campus = $request->campus;
-        $building = $request->building;
-        $roomType = $request->roomtype;
-        $roomFilter = $request->roomfilter;
-
-        $matchingRooms = DB::table('Rooms')->select('Room')
-            ->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
-            ->where('campus', '=', $campus)
-            ->where('Building', '=', $building)
-            ->where('RoomType', '=', $roomType)
-            ->groupBy('Room')->get();
-
-        $matchingRooms1 = DB::table('Rooms')->select('Room')
-            //->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
-            ->where('campus', '=', $campus)
-            ->where('Building', '=', $building)
-            ->where('RoomType', '=', $roomType)
-            ->groupBy('Room')->get();
-
-        $freeRooms = DB::select('CALL `nsccschedule`.`GetFreeRoomsNow`();');
-
-        $y = array();
-        $z = array();
-
-        foreach($matchingRooms as $m) {
-            $y[] = $m->Room;
-        }
-
-        foreach($freeRooms as $f) {
-            $z[] = $f->room;
-        }
-
-        $matchingFreeRooms = array_intersect($y, $z);
-        return $matchingRooms1;
-    }
     
     /**
      * Store a newly created resource in storage.

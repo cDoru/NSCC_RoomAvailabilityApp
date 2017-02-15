@@ -19,54 +19,38 @@ Route::get('FreeRoom/roomData/{campus}/{building}/{roomType?}/{filter?}',
     function($campus, $building, $roomType = null, $filter = null) {
         $filter = strtoupper($filter); //convert uppercase
         if($roomType && $filter) {
-            $matchingRooms = DB::table('Rooms')->select('Room')
-                ->where('campus', '=', $campus)
-                ->where('Building', '=', $building)
-                ->where('RoomType', '=', $roomType)
-                ->where('Room', 'like', "'%'". $filter."%'")
-                ->groupBy('Room')->get();
+            $matchingRooms = DB::table('Rooms')->select('Rooms.Room')
+                ->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
+                ->where('Rooms.campus', '=', $campus)
+                ->where('Rooms.Building', '=', $building)
+                ->where('Rooms.RoomType', '=', $roomType)
+                ->where('Rooms.Room', 'like', "'%'". $filter."%'")
+                ->groupBy('Rooms.Room')->get();
         }
         elseif($roomType) {
-            $matchingRooms = DB::table('Rooms')->select('Room')
-                ->where('campus', '=', $campus)
-                ->where('Building', '=', $building)
-                ->where('RoomType', '=', $roomType)
-                ->groupBy('Room')->get();
+            $matchingRooms = DB::table('Rooms')->select('Rooms.Room')
+                ->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
+                ->where('Rooms.campus', '=', $campus)
+                ->where('Rooms.Building', '=', $building)
+                ->where('Rooms.RoomType', '=', $roomType)
+                ->groupBy('Rooms.Room')->get();
         }
         elseif($filter){
-            $matchingRooms = DB::table('Rooms')->select('Room')
-                ->where('campus', '=', $campus)
-                ->where('Building', '=', $building)
-                ->where('Room', 'like', "'%'". $filter."%'")
-                ->groupBy('Room')->get();
+            $matchingRooms = DB::table('Rooms')->select('Rooms.Room')
+                ->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
+                ->where('Rooms.campus', '=', $campus)
+                ->where('Rooms.Building', '=', $building)
+                ->where('Rooms.Room', 'like', "'%'". $filter."%'")
+                ->groupBy('Rooms.Room')->get();
         }
         else{
-            $matchingRooms = DB::table('Rooms')->select('Room')
-                ->where('campus', '=', $campus)
-                ->where('Building', '=', $building)
-                ->groupBy('Room')->get();
-
-            $matchingRooms1 = DB::table('Rooms')->select('Rooms.Room')
+            $matchingRooms = DB::table('Rooms')->select('Rooms.Room')
                 ->join('FreeRoomsNowView', 'FreeRoomsNowView.room', '=', 'Rooms.Room')
                 ->where('Rooms.campus', '=', $campus)
                 ->where('Rooms.Building', '=', $building)
                 ->groupBy('Rooms.Room')->get();
         }
-        $freeRooms = DB::select('CALL `nsccschedule`.`GetFreeRoomsNow`();');
-        
-        $y = array();
-        $z = array();
-
-        foreach ($matchingRooms as $m) {
-            $y[] = $m->Room;
-        }
-
-        foreach ($freeRooms as $f) {
-            $z[] = $f->room;
-        }
-
-        $matchingFreeRooms = array_intersect($y, $z);
-        return json_encode($matchingRooms1); //$matchingFreeRooms;
+        return json_encode($matchingRooms); //$matchingFreeRooms;
 
 }); //handles ajax calls for free rooms
 

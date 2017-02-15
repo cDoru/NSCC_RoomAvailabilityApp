@@ -92,25 +92,22 @@ $(document).ready(function(){
         //called when all form items are populated and ready to fetch room data
         
         //get form element values
-        $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + roomType, function(result){
+        $roomType = "";
+        if(roomType != 0){
+            $roomType = roomType;
+        }
+        $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
             
-            $roomTypesObj = JSON.parse(result);
-            //$("#roomstable").html(result);
+            var $roomsObj = JSON.parse(result);
+            $("#roomstable").html('');
+           // $("#roomstable").html(result);
 
-            //[todo] need to call Vue HTML component here to load table with data
-            //[todo] fix link: https://vuejs.org/v2/guide/syntax.html
-            Vue.component('todo-item', {
-                props: ['todo'],
-                template: '<tr><td><a href="/RoomSchedule/">{{ todo.Room }}</a></tr></td>'
-            })
-            "'/path/to/images/' + fileName"
-            var app7 = new Vue({
-                el: '#app-7',
-                data: {
-                    rooms:  $roomTypesObj
-                }
-            })
+            $( "#roomstable" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
+            $.each($roomsObj, function() {
+                $( "#roomstable" ).append("<tr><td><a href='/RoomSchedule/" +
+                    this.Room + "'>" + this.Room + "</a></td></tr>");
 
+            });
 
         });
     }
