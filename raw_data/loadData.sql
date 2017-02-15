@@ -185,6 +185,26 @@ CREATE TABLE BuildingsLU AS
 		WHERE building <> 'CUSTOMER'
 	);
 
+-- NEW: Create FreeRoomsNow as a dynamic view
+CREATE VIEW FreeRoomsNowView AS
+ (
+ SELECT DISTINCT room FROM nsccSchedule
+      WHERE room NOT IN(
+        SELECT DISTINCT room FROM nsccSchedule
+        WHERE days LIKE CONCAT('%',(
+          SELECT dayChar
+          FROM daysLU
+          WHERE id = DAYOFWEEK(NOW())
+          ), '%')
+        AND
+          (TIME(NOW()) > startTime
+          AND TIME(NOW()) < endTime)
+        AND
+          (DATE(NOW()) > startDate
+          AND DATE(NOW()) < endDate)
+      )
+);
+
 DROP PROCEDURE IF EXISTS GetFreeRoomsNow;
 DELIMITER //
 CREATE PROCEDURE GetFreeRoomsNow()
