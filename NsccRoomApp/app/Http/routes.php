@@ -56,7 +56,7 @@ Route::get('FreeRoom/roomData/{campus}/{building}/{roomType?}/{filter?}',
 
 Route::get('FreeRoom/roomTypeData/{building}', function($building) {
     //'FreeRoomController@retrieveRoomTypeData'
-    $roomTypes = \DB::table('Rooms')
+    $roomTypes = DB::table('Rooms')
         ->select('RoomType')
         ->where('Building','=', $building)
         ->distinct()->get();
@@ -69,8 +69,18 @@ Route::resource('/FreeRoom','FreeRoomController'
     ,  ['only' => ['index', 'show', 'store']]
 );
 
-Route::post('FreeRoom/buildingList', 'FreeRoomController@retrieveBuildingList');
+//Route::post('FreeRoom/buildingList', 'FreeRoomController@retrieveBuildingList');
 
 Route::resource('/RoomSchedule','RoomController');
+
+
+Route::get('RoomSchedule/{campus}/{building}', function($campus, $building){
+   $result = DB::table('Rooms')->select('Rooms.Room')
+       ->where('Rooms.campus', '=', $campus)
+       ->where('Rooms.Building', '=', $building)
+       ->groupBy('Rooms.Room')->get();
+
+    return json_encode($result);
+});
 
 Route::resource('/Locate','LocateController');

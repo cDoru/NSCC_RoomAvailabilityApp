@@ -183,7 +183,52 @@ CREATE TABLE BuildingsLU AS
 		SELECT DISTINCT campus, building
 		FROM nsccSchedule
 		WHERE building <> 'CUSTOMER'
+		AND building <> 'VIRTUAL'
 	);
+
+
+--NEW: Adds descriptive names of campuses to BuildingsLU
+ALTER TABLE BuildingsLU ADD COLUMN campusName VARCHAR(250);
+ALTER TABLE BuildingsLU ADD COLUMN buildingName VARCHAR(250);
+
+UPDATE BuildingsLU SET campusName = 'Akerley' WHERE campus = 'AKERL';
+UPDATE BuildingsLU SET campusName = 'Annapolis Valley' WHERE campus = 'ANNAP';
+UPDATE BuildingsLU SET campusName = 'Burridge' WHERE campus = 'BURRI';
+UPDATE BuildingsLU SET campusName = 'Cumberland' WHERE campus = 'CUMBE';
+UPDATE BuildingsLU SET campusName = 'Institute of Technology' WHERE campus = 'INSTI';
+UPDATE BuildingsLU SET campusName = 'Kingstec' WHERE campus = 'KINGS';
+UPDATE BuildingsLU SET campusName = 'Lunenburg' WHERE campus = 'LUNEN';
+UPDATE BuildingsLU SET campusName = 'Marconi' WHERE campus = 'MARCO';
+UPDATE BuildingsLU SET campusName = 'Pictou' WHERE campus = 'PICTO';
+UPDATE BuildingsLU SET campusName = 'Shelburne' WHERE campus = 'SHELB';
+UPDATE BuildingsLU SET campusName = 'Strait Area' WHERE campus = 'STRAT';
+UPDATE BuildingsLU SET campusName = 'Truro' WHERE campus = 'TRURO';
+UPDATE BuildingsLU SET campusName = 'Waterfront' WHERE campus = 'WATER';
+
+UPDATE BuildingsLU SET buildingName = 'Akerley' WHERE building = 'AKE';
+UPDATE BuildingsLU SET buildingName = 'Centre for Geographic Sciences' WHERE building = 'COG';
+UPDATE BuildingsLU SET buildingName = 'Annapolis Valley' WHERE building = 'MID';
+UPDATE BuildingsLU SET buildingName = 'Burridge' WHERE building = 'BUR';
+UPDATE BuildingsLU SET buildingName = 'Digby Site' WHERE building = 'DIG';
+UPDATE BuildingsLU SET buildingName = 'Amherst Site' WHERE building = 'AMH';
+UPDATE BuildingsLU SET buildingName = 'Cumberland' WHERE building = 'CUM';
+UPDATE BuildingsLU SET buildingName = 'Institute of Technology' WHERE building = 'ITC';
+UPDATE BuildingsLU SET buildingName = 'Kingstec' WHERE building = 'KIN';
+UPDATE BuildingsLU SET buildingName = 'Lunenburg' WHERE building = 'LUN';
+UPDATE BuildingsLU SET buildingName = 'Marconi' WHERE building = 'MAR';
+UPDATE BuildingsLU SET buildingName = 'Pictou' WHERE building = 'PIC';
+UPDATE BuildingsLU SET buildingName = 'Shelburne' WHERE building = 'SHE';
+UPDATE BuildingsLU SET buildingName = 'Strait Area' WHERE building = 'STR';
+UPDATE BuildingsLU SET buildingName = 'Wagmatcook Learning Centre' WHERE building = 'WAG';
+UPDATE BuildingsLU SET buildingName = 'Forrester' WHERE building = 'TRF';
+UPDATE BuildingsLU SET buildingName = 'Gittens' WHERE building = 'TRG';
+UPDATE BuildingsLU SET buildingName = 'McCarthy' WHERE building = 'TRM';
+UPDATE BuildingsLU SET buildingName = 'Soloan' WHERE building = 'TRS';
+UPDATE BuildingsLU SET buildingName = 'Gym' WHERE building = 'TRU';
+UPDATE BuildingsLU SET buildingName = 'Waterfront' WHERE building = 'WAT';
+UPDATE BuildingsLU SET buildingName = 'Aviation Institute' WHERE building = 'AVA';
+UPDATE BuildingsLU SET buildingName = 'ST CAMPUS' WHERE building = 'ST CAMPUS';
+
 
 -- NEW: Create FreeRoomsNow as a dynamic view
 CREATE VIEW FreeRoomsNowView AS
