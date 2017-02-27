@@ -59,15 +59,9 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-
-
-
-                    <li><a href="{{ url('/FreeRoom') }}">Find a Free Room</a></li>
-                    <li><a href="{{ url('/RoomSchedule') }}">Room Schedule</a></li>
-                    <li><a href="{{ url('/Locate') }}">Locate a Room</a></li>
-
-
-
+                <li><a href="{{ url('/FreeRoom') }}">Find a Free Room</a></li>
+                <li><a href="{{ url('/RoomSchedule') }}">Room Schedule</a></li>
+                <li><a href="{{ url('/Locate') }}">Locate a Room</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -99,8 +93,8 @@
 
 <!-- referenced by FreeRoom.blade.php so needs to load first -->
 <!-- ORDER of js is important do not change (that means you ryan!) -->
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="{{ asset('js/appUI.js') }}"></script>
+<!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+
 
 <!-- JavaScripts (twitter requires older version of jquery)-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 
 class locateController extends Controller
 {
@@ -15,7 +16,18 @@ class locateController extends Controller
      */
     public function index()
     {
-        return view('/Locate');
+        // THIS IS EXACT COPY OF FREE ROOM CONTROLLER AT PRESENT
+        $selectedCampus = null;
+        $selectedBuilding = null;
+        $building = null;
+        $roomtype = null;
+        $matchingRooms = null;
+        $selectedRoomType = null;
+        $matchingFreeRooms = null;
+        $buildingsList = DB::table('BuildingsLU')->orderBy('campus')->orderBy('building')->get();
+
+        return view('Locate', compact('selectedCampus', 'selectedBuilding',
+            'roomtype', 'matchingRooms', 'selectedRoomType', 'matchingFreeRooms', 'buildingsList'));
     }
 
     /**
@@ -45,42 +57,6 @@ class locateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -5,7 +5,7 @@
     <script>
         $(document).ready(function(){
             var $buildingsList = '{!! json_encode($buildingsList)!!}';
-            $scheduleBuildingsObj = JSON.parse($buildingsList); //global variable
+            $buildingsObj = JSON.parse($buildingsList); //global variable
         });
 
 
@@ -14,41 +14,37 @@
     <div class="container col-md-6 col-md-offset-3">
         <div class="row">
             <h1>NSCC Room Availability App</h1>
-            <h3>Find a room's schedule</h3>
+            <h3>Find a free room</h3>
             <form method="post" name="myform" id="myform">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="scheduleCampus">Campus</label>
-                    <select name="scheduleCampus" id="scheduleCampus" class="form-control">
+                    <label for="campus">Campus</label>
+                    <select name="campus" id="campus" class="form-control">
                         <option value="0">&#60;Select Your Campus&#62;</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="scheduleBuilding">Building</label>
-                    <select name="scheduleBuilding" id="scheduleBuilding" class="form-control">
+                    <label for="building">Building</label>
+                    <select name="building" id="building" class="form-control">
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="room">Room</label>
-                    <select name="room" id="room" class="form-control">
+                    <label for="roomtype">Room Type</label>
+                    <select name="roomtype" id="roomtype" class="form-control">
                     </select>
                 </div>
-
-
-                <div align="center" class="form-group">
-                    <button type="button" name="button" id="button" class="btn btn-primary">View Room Schedule</button>
-                </div>
-
-
             </form>
         </div>
 
+        {{--THIS SHOULD BE SEPERATE BLADE COMPONENT --}}
         <div id="roomstable">
 
         </div>
 
-    </div>
+        <div id="app-7">
 
+        </div>
+        <script src="{{ asset('js/appUI.js') }}"></script>
 @endsection

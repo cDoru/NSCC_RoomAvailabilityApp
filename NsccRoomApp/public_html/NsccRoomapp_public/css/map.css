@@ -1,8 +1,4 @@
-body {
-    margin-left: 1px;
-    font-family: "arial";
-    background-color: #CCCCCC
-}
+
 
 #mainframe {height: auto;
     /*border: 1px dashed #f00;*/
@@ -23,7 +19,7 @@ body {
     border-radius: 15px;
 }
 
-#menu {
+#mapmenu {
     background: #fff;
     position: absolute;
     z-index: 1;
@@ -35,7 +31,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-#menu a {
+#mapmenu a {
     font-size: 13px;
     color: #404040;
     display: block;
@@ -47,20 +43,20 @@ body {
     text-align: center;
 }
 
-#menu a:last-child {
+#mapmenu a:last-child {
     border: none;
 }
 
-#menu a:hover {
+#mapmenu a:hover {
     background-color: #f8f8f8;
     color: #404040;
 }
 
-#menu a.active {
+#mapmenu a.active {
     background-color: #3887be;
     color: #ffffff;
 }
 
-#menu a.active:hover {
+#mapmenu a.active:hover {
     background: #3074a4;
 }

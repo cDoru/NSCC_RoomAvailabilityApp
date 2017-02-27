@@ -31,92 +31,89 @@ $(document).ready(function(){
         });
 
 
-        //FORM ELEMENT CHANGE ACTION
-        /*
-         repopulate the building dropdown when campus is updated
-         */
-        function buildingUpdate(campus) {
+    //FORM ELEMENT CHANGE ACTION
+    /*
+     repopulate the building dropdown when campus is updated
+     */
+    function buildingUpdate(campus){
 
-            var $buildingDropdown = $("#building");
-            $buildingDropdown.html(''); //remove existing values
+        var $buildingDropdown = $("#building");
+        $buildingDropdown.html(''); //remove existing values
 
-            $.each($buildingsObj, function () {
-                if (this.campus == $("#campus").val()) {
-                    $buildingDropdown.append($("<option />").val(this.building).text(this.buildingName));
+        $.each($buildingsObj, function() {
+            if(this.campus == $("#campus").val()){
+                $buildingDropdown.append($("<option />").val(this.building).text(this.buildingName));
+            }
+        });
+        return $buildingDropdown.val();
+    }
+
+    /*
+    Get Updated RoomType values based on updated building
+    Try to keep the selected RoomType the same if it still is avail
+     */
+    function roomTypeUpdate(building, prevRoomType){
+        var $roomTypeDropdown = $("#roomtype");
+        $roomTypeDropdown.html(''); //remove existing
+        $roomTypeDropdown.append($("<option />").val("0").text("<< Any RoomType >>"));
+        $.get("FreeRoom/roomTypeData/" + building, function(data){
+            $roomTypesObj = JSON.parse(data);
+            $.each($roomTypesObj, function() {
+                if(this.RoomType == prevRoomType){
+                    $roomTypeDropdown.append($("<option selected='selected'/>").val(this.RoomType).text(this.RoomType));
                 }
+                else {
+                    $roomTypeDropdown.append($("<option />").val(this.RoomType).text(this.RoomType));
+                }
+
             });
-            return $buildingDropdown.val();
-        }
 
-        /*
-         Get Updated RoomType values based on updated building
-         Try to keep the selected RoomType the same if it still is avail
-         */
-        function roomTypeUpdate(building, prevRoomType) {
-            var $roomTypeDropdown = $("#roomtype");
-            $roomTypeDropdown.html(''); //remove existing
-            $roomTypeDropdown.append($("<option />").val("0").text("<< Any Room Type >>"));
-            $.get("FreeRoom/roomTypeData/" + building, function (data) {
-                $roomTypesObj = JSON.parse(data);
-                $.each($roomTypesObj, function () {
-                    if (this.RoomType == prevRoomType) {
-                        $roomTypeDropdown.append($("<option selected='selected'/>").val(this.RoomType).text(this.RoomType));
-                    }
-                    else {
-                        $roomTypeDropdown.append($("<option />").val(this.RoomType).text(this.RoomType));
-                    }
-
-                });
-
-                return $roomTypeDropdown.val();
-            });
             return $roomTypeDropdown.val();
+        });
+        return $roomTypeDropdown.val();
+    }
+
+   
+    $('#campus').change(function(){
+        //campus item change
+        if($("#campus option[value='0']").length > 0){
+            $("#campus option[value='0']").remove();
         }
+        var $campus = $('#campus').val();
+        var $selectedBuilding = buildingUpdate($campus);
+        var $prevSelectedRoomType = $('#roomtype').val();
+        var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
+        formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
+    });
 
+    $('#building').change(function(){
+        formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
+    });
 
-        $('#campus').change(function () {
-            //campus item change
-            if ($("#campus option[value='0']").length > 0) {
-                $("#campus option[value='0']").remove();
-            }
-            var $campus = $('#campus').val();
-            var $selectedBuilding = buildingUpdate($campus);
-            var $prevSelectedRoomType = $('#roomtype').val();
-            var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
-            formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
-        });
+    $('#roomtype').change(function(){
+        formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
+    });
 
-        $('#building').change(function () {
-            var $selectedRoomType = roomTypeUpdate($('#building').val(), $('#roomtype').val());
-            formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
-        });
+    function formUpdate(campus, building, roomType, filter){
+        //called when all form items are populated and ready to fetch room data
+        
+        //get form element values
+        $roomType = "";
+        if(roomType != 0){
+            $roomType = roomType;
+        }
+        $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
+            
+            var $roomsObj = JSON.parse(result);
+            $("#roomstable").html('');
+           // $("#roomstable").html(result);
 
-        $('#roomtype').change(function () {
-            formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
-        });
+            $( "#roomstable" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
+            $.each($roomsObj, function() {
+                $( "#roomstable" ).append("<tr><td><a href='/RoomSchedule/" +
+                    this.Room + "'>" + this.Room + "</a></td></tr>");
 
-
-
-        function formUpdate(campus, building, roomType, filter) {
-            //called when all form items are populated and ready to fetch room data
-
-            //get form element values
-            $roomType = "";
-            if (roomType != 0) {
-                $roomType = roomType;
-            }
-            $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function (result) {
-
-                var $roomsObj = JSON.parse(result);
-                $("#roomstable").html('');
-                // $("#roomstable").html(result);
-
-                $("#roomstable").append("<table><tr><th>Free Rooms Matching Your Criteria</th></tr>");
-                $.each($roomsObj, function () {
-                    $("#roomstable").append("<tr><td><a href='/RoomSchedule/" +
-                        this.Room + "'>" + this.Room + "</a></td></tr>");
-
-                });
+            });
 
             });
         }
