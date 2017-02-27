@@ -2,107 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a977f53a-1f05-44c2-a5dd-9cbd03057ecd" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.env.example" afterPath="$PROJECT_DIR$/NsccRoomApp_res/.env.example" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="$PROJECT_DIR$/NsccRoomApp_res/.gitattributes" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Console/Commands/Inspire.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Console/Commands/Inspire.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Console/Kernel.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Console/Kernel.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Event.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Event.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Events/Event.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Events/Event.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Exceptions/Handler.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/Auth/AuthController.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/PasswordController.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/Auth/PasswordController.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/Controller.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Controllers/FreeRoomController.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/FreeRoomController.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/HomeController.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Controllers/LocateController.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/LocateController.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Controllers/RoomController.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/RoomController.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Kernel.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Middleware/Authenticate.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Middleware/EncryptCookies.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Middleware/RedirectIfAuthenticated.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Middleware/VerifyCsrfToken.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/Requests/Request.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/Requests/Request.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Jobs/Job.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Jobs/Job.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Listeners/.gitkeep" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Listeners/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Policies/.gitkeep" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Policies/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Providers/AppServiceProvider.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Providers/AuthServiceProvider.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Providers/EventServiceProvider.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/Providers/RouteServiceProvider.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/app/User.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/artisan" afterPath="$PROJECT_DIR$/NsccRoomApp_res/artisan" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/bootstrap/app.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/bootstrap/app.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/bootstrap/autoload.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/bootstrap/autoload.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/bootstrap/cache/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/bootstrap/cache/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/NsccRoomApp_res/composer.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/NsccRoomApp_res/composer.lock" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/app.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/auth.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/auth.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/broadcasting.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/broadcasting.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/cache.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/cache.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/compile.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/compile.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/database.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/database.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/filesystems.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/filesystems.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/mail.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/mail.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/queue.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/queue.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/services.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/services.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/session.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/session.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/config/view.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/config/view.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/database/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/factories/ModelFactory.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/database/factories/ModelFactory.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/.gitkeep" afterPath="$PROJECT_DIR$/NsccRoomApp_res/database/migrations/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/database/migrations/2014_10_12_000000_create_users_table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/database/migrations/2014_10_12_100000_create_password_resets_table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/seeds/.gitkeep" afterPath="$PROJECT_DIR$/NsccRoomApp_res/database/seeds/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/database/seeds/DatabaseSeeder.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/NsccRoomApp_res/gulpfile.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/NsccRoomApp_res/package.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/phpunit.xml" afterPath="$PROJECT_DIR$/NsccRoomApp_res/phpunit.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/.htaccess" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/.htaccess" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/css/app.css" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/css/app.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/css/fullcalendar.css" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/css/fullcalendar.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/css/map.css" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/css/map.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/favicon.ico" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/favicon.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/index.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/app.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/appUI.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/fullcalendar.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/fullcalendar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/jquery.min.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/jquery.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/mapEngine.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/mapEngine.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/moment.min.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/moment.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/robots.txt" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/robots.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/web.config" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/web.config" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/NsccRoomApp_res/readme.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/assets/sass/app.scss" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/assets/sass/app.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/lang/en/auth.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/lang/en/auth.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/lang/en/pagination.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/lang/en/pagination.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/lang/en/passwords.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/lang/en/passwords.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/lang/en/validation.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/lang/en/validation.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/Calendar.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/Calendar.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/FreeRoom.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/Home.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/Locate.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/Locate.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/RoomSchedule.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/RoomSchedule.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/errors/503.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/errors/503.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/get_building.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/get_building.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/maptest_addlayer.html" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/maptest_addlayer.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/vendor/.gitkeep" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/vendor/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/server.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/server.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/storage/app/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/storage/app/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/storage/app/public/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/storage/framework/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/storage/framework/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/storage/framework/cache/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/storage/framework/sessions/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/storage/framework/views/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/storage/logs/.gitignore" afterPath="$PROJECT_DIR$/NsccRoomApp_res/storage/logs/.gitignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/ExampleTest.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/tests/ExampleTest.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/TestCase.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/tests/TestCase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/NsccRoomApp.iml" afterPath="$PROJECT_DIR$/.idea/NsccRoomApp.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/NsccRoomapp_public/media/campuses.geoJSON" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/media/campuses.geoJSON" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js" />
     </list>
     <ignored path="NsccRoomApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -128,32 +30,22 @@
     <favorites_list name="NsccRoomApp" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RouteServiceProvider.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/RouteServiceProvider.php">
+    <leaf>
+      <file leaf-file-name="Home.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+            <state relative-caret-position="135">
+              <caret line="9" column="63" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Locate.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Locate.blade.php">
+      <file leaf-file-name="get_building.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/get_building.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="915">
-              <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mapEngine.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/mapEngine.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="302" column="23" selection-start-line="302" selection-start-column="23" selection-end-line="302" selection-end-column="23" />
+            <state relative-caret-position="195">
+              <caret line="13" column="2" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -162,38 +54,8 @@
       <file leaf-file-name="appUI.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="44" column="98" selection-start-line="44" selection-start-column="98" selection-end-line="44" selection-end-column="98" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FreeRoom.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="campuses.geoJSON" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/media/campuses.geoJSON">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="47" column="58" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="56" column="65" selection-start-line="56" selection-start-column="56" selection-end-line="56" selection-end-column="65" />
+            <state relative-caret-position="643">
+              <caret line="174" column="10" selection-start-line="174" selection-start-column="10" selection-end-line="175" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -209,7 +71,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -244,8 +105,11 @@
         <option value="$PROJECT_DIR$/public_html/NsccRoomapp_public/index.php" />
         <option value="$PROJECT_DIR$/public_html/NsccRoomapp_public/media/campuses.geoJSON" />
         <option value="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/mapEngine.js" />
-        <option value="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js" />
         <option value="$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
+        <option value="$PROJECT_DIR$/NsccRoomApp_res/.env" />
+        <option value="$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php" />
+        <option value="$PROJECT_DIR$/NsccRoomApp_res/resources/views/get_building.php" />
+        <option value="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js" />
       </list>
     </option>
   </component>
@@ -255,11 +119,6 @@
   </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-    <gulpfiles>
-      <GulpfileState>
-        <gulpfile-path>$PROJECT_DIR$/NsccRoomApp_res/gulpfile.js</gulpfile-path>
-      </GulpfileState>
-    </gulpfiles>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpDebugGeneral" notify_if_session_was_finished_without_being_paused="false" />
@@ -360,6 +219,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -396,7 +256,15 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NsccRoomApp_res" />
+              <option name="myItemId" value="public_html" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NsccRoomapp_public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -407,43 +275,12 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="NsccRoomApp" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NsccRoomApp_res" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NsccRoomApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NsccRoomApp" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NsccRoomApp_res" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -471,14 +308,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/NsccRoomApp_res" />
+      <recent name="$PROJECT_DIR$/public" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/NsccRoomApp_res" />
       <recent name="$PROJECT_DIR$/public_html/NsccRoomapp_public" />
       <recent name="$PROJECT_DIR$/public_html" />
       <recent name="$PROJECT_DIR$/resources/views" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Built-in Web Server.testServer_Branch">
@@ -572,6 +410,9 @@
       <workItem from="1488115894020" duration="7904000" />
       <workItem from="1488156170688" duration="1229000" />
       <workItem from="1488200462619" duration="667000" />
+      <workItem from="1488201852804" duration="219000" />
+      <workItem from="1488202107503" duration="96000" />
+      <workItem from="1488202225566" duration="2922000" />
     </task>
     <task id="LOCAL-00001" summary="started front end">
       <created>1485179920732</created>
@@ -696,22 +537,21 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136347000" />
+    <option name="totallyTimeSpent" value="139584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="28" width="1602" height="839" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22580644" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.225625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.76241136" sideWeight="0.6707317" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6925287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30603448" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30513176" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19971265" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19833565" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3617021" sideWeight="0.3292683" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -719,6 +559,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -803,338 +644,88 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/RoomSchedule.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/FreeRoomController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/LocateController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="50" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/FreeRoomController.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/LocateController.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php" />
     <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/.env" />
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/RoomSchedule.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/LocateController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/RoomSchedule.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/LocateController.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php" />
     <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/.env" />
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/LocateController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/LocateController.php" />
     <entry file="file://$PROJECT_DIR$/public/CalendarPrototype/app/Http/Kernel.php" />
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Event.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/vendor/composer/ClassLoader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="412" column="0" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="0" column="11408" selection-start-line="0" selection-start-column="11408" selection-end-line="0" selection-end-column="11408" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Calendar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="48" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Event.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/HomeController.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/vendor/composer/ClassLoader.php" />
+    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/app.js" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/Controller.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Calendar.blade.php" />
     <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/bootstrap/cache/compiled.php" />
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/RoomController.php">
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/RoomController.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Requests/Request.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/components/RoomTable.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/readme.md" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/FreeRoomController.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/RoomSchedule.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/EventServiceProvider.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/AuthServiceProvider.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/AppServiceProvider.php" />
+    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/index.php" />
+    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/web.config" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/config/app.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/bootstrap/app.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/RouteServiceProvider.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Locate.blade.php" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
+    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/media/campuses.geoJSON" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php" />
+    <entry file="file://$PROJECT_DIR$/.env" />
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Requests/Request.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/components/RoomTable.blade.php" />
     <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/get_building.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/readme.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/Controllers/FreeRoomController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="26" column="97" selection-start-line="26" selection-start-column="97" selection-end-line="26" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/RoomSchedule.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="34" column="71" selection-start-line="34" selection-start-column="71" selection-end-line="34" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1116">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/EventServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/AuthServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/web.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1710">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/bootstrap/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="56" column="65" selection-start-line="56" selection-start-column="56" selection-end-line="56" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/app/Providers/RouteServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Locate.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/media/campuses.geoJSON">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="58" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="59" />
+          <caret line="13" column="2" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/mapEngine.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="302" column="23" selection-start-line="302" selection-start-column="23" selection-end-line="302" selection-end-column="23" />
+        <state relative-caret-position="-855">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="44" column="98" selection-start-line="44" selection-start-column="98" selection-end-line="44" selection-end-column="98" />
+        <state relative-caret-position="643">
+          <caret line="174" column="10" selection-start-line="174" selection-start-column="10" selection-end-line="175" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php">
+    <entry file="file://$PROJECT_DIR$/NsccRoomApp_res/resources/views/Home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
+        <state relative-caret-position="135">
+          <caret line="9" column="63" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
           <folding />
         </state>
       </provider>

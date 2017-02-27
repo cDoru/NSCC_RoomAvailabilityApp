@@ -122,7 +122,7 @@ $(document).ready(function(){
     else if($scheduleBuildingsObj){
 
         var $submitBtn = document.getElementById('button');
-        $submitBtn.disabled = 'true';
+        $submitBtn.disabled = true;
 
         $campusesList = [];
         $list = [];
@@ -144,7 +144,7 @@ $(document).ready(function(){
 
 
         $('#scheduleCampus').change(function () {
-            $submitBtn.disabled = 'true';
+            $submitBtn.disabled = true;
             //campus item change
             if ($("#scheduleCampus option[value='0']").length > 0) {
                 $("#scheduleCampus option[value='0']").remove();
@@ -156,16 +156,16 @@ $(document).ready(function(){
         });
 
         $('#scheduleBuilding').change(function () {
-            $submitBtn.disabled = 'true';
+            $submitBtn.disabled = true;
             roomUpdate($('#scheduleCampus').val(), $('#scheduleBuilding').val());
         });
 
         $('#room').change(function (){
            if($('#room').val() != 0){
-               $submitBtn.disabled = !$submitBtn.disabled;
+               $submitBtn.disabled = false;
            }
             else{
-               $submitBtn.disabled = 'true';
+               $submitBtn.disabled = true;
            }
         });
 
