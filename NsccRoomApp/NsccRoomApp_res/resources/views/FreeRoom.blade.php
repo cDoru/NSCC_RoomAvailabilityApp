@@ -2,6 +2,12 @@
 
 @section('content')
 
+    <link rel='stylesheet' href='/css/fullcalendar.css' />
+    <script src='{{asset('/js/jquery.min.js')}}'></script>
+    <script src='{{asset('/js/moment.min.js')}}'></script>
+    <script src='{{asset('/js/fullcalendar.js')}}'></script>
+
+
     <script>
         $(document).ready(function(){
             var $buildingsList = '{!! json_encode($buildingsList)!!}';
@@ -51,7 +57,5 @@
 
     </div>
 
-
     <script src="{{ asset('js/appUI.js') }}"></script>
-
 @endsection

@@ -103,7 +103,7 @@ $(document).ready(function(){
         
     $('#roomsbox').change(function () {
         $button1.disabled = false;
-        
+        // window.location = "/RoomSchedule/" + $('#roomsbox').val().toString();
         });
 
     $button1.onclick = function() {
