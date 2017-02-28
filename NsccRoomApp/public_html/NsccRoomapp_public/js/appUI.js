@@ -103,62 +103,7 @@ $(document).ready(function(){
         
     $('#roomsbox').change(function () {
         $button1.disabled = false;
-        $('#calendar').html('');
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-            header: {
-                left: 'today prev,next',
-                center: 'title',
-                right: 'agendaWeek,agendaDay'
-            },
-
-            // titleFormat: '[<?php echo $roomNum ?>]'+' | '+'MMMM D, YYYY',
-
-            defaultView: 'agendaDay',
-
-            allDaySlot: false,
-
-            minTime: "07:00:00",
-
-            maxTime: "23:00:00",
-
-            events: [
-                {
-                    title: 'Nick\'s Event',
-                       start: '2017-02-28T12:00:00',
-                       end: '2017-02-28T13:00:00',
-                       description: 'This is a cool event'
-                }
-
-//             <?php
-//                 foreach($eventArray as $e){ ?>
-//             {
-//                 title: '<?php echo $e->title.'\n'.preg_replace('/[,]/', ', ',(preg_replace('/[\']/', '`',$e->description))); ?>',
-// start: '<?php echo $e->start; ?>',
-//     end: '<?php echo $e->end; ?>',
-//     description: ''
-// },
-// <?php } ?>
-
-
-//
-],
-//
-
-//                eventClick: function(calEvent, jsEvent, view) {
-//
-//                    alert('Event Description: ' + calEvent.description);
-//                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-//                    alert('View: ' + view.name);
-//
-//                    // change the border color just for fun
-//                    $(this).css('border-color', 'red');
-//
-//                }
-
-
-
-})
+        
         });
 
     $button1.onclick = function() {
