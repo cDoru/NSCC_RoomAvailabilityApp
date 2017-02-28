@@ -30,12 +30,18 @@
 
                 defaultView: 'agendaDay',
 
+                allDaySlot: false,
+
+                minTime: "07:00:00",
+
+                maxTime: "23:00:00",
+
                 events: [
 
                         <?php
                         foreach($eventArray as $e){ ?>
                         {
-                            title: '<?php echo $e->title.'\n'.preg_replace('/[\']/', '`',$e->description); ?>',
+                            title: '<?php echo $e->title.'\n'.preg_replace('/[,]/', ', ',(preg_replace('/[\']/', '`',$e->description))); ?>',
                             start: '<?php echo $e->start; ?>',
                             end: '<?php echo $e->end; ?>',
                             description: ''
