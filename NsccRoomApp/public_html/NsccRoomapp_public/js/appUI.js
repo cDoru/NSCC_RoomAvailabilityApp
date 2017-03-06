@@ -8,6 +8,7 @@
  *
  */
 
+
 $(document).ready(function(){
     //LOAD PAGE ACTION
     if($buildingsObj) {
@@ -33,6 +34,15 @@ $(document).ready(function(){
                 $list.push(this.campus);
             }
         });
+
+        if(sessionStorage.getItem("currentCampus") != null) {
+            document.getElementById('campus').value = sessionStorage.getItem("currentCampus");
+            buildingUpdate(sessionStorage.getItem("currentCampus"));
+            document.getElementById('building').value = sessionStorage.getItem("currentBuilding");
+            roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
+            document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
+            formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"), "");
+        }
 
 
     //FORM ELEMENT CHANGE ACTION
@@ -85,7 +95,9 @@ $(document).ready(function(){
             $("#campus option[value='0']").remove();
         }
         var $campus = $('#campus').val();
-        var $selectedBuilding = buildingUpdate($campus);
+        sessionStorage.setItem("currentCampus", $campus)
+        var $selectedBuilding = buildingUpdate(sessionStorage.getItem("currentCampus"));
+        sessionStorage.setItem("currentBuilding", $selectedBuilding);
         var $prevSelectedRoomType = $('#roomtype').val();
         var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
         formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
@@ -93,11 +105,13 @@ $(document).ready(function(){
 
     $('#building').change(function(){
         $button1.disabled = true;
+        sessionStorage.setItem("currentBuilding", $('#building').val());
         formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
     });
 
     $('#roomtype').change(function(){
         $button1.disabled = true;
+        sessionStorage.setItem("currentRoomType", $('#roomtype').val());
         formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
     });
         
@@ -158,6 +172,14 @@ $(document).ready(function(){
             }
         });
 
+        if(sessionStorage.getItem("scheduleCampus") != null) {
+            document.getElementById('scheduleCampus').value = sessionStorage.getItem("scheduleCampus");
+            scheduleBuildingUpdate(sessionStorage.getItem("scheduleCampus"));
+            document.getElementById('scheduleBuilding').value = sessionStorage.getItem("scheduleBuilding");
+            roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
+            // document.getElementById('room').value = sessionStorage.getItem("room");
+        }
+
 
         $('#scheduleCampus').change(function () {
             $submitBtn.disabled = true;
@@ -166,14 +188,17 @@ $(document).ready(function(){
                 $("#scheduleCampus option[value='0']").remove();
             }
             var $campus = $('#scheduleCampus').val();
+            sessionStorage.setItem("scheduleCampus", $campus)
             var $selectedBuilding = scheduleBuildingUpdate($campus);
-            roomUpdate($('#scheduleCampus').val(), $selectedBuilding);
+            sessionStorage.setItem("scheduleBuilding", $selectedBuilding)
+            roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
             // var $prevSelectedRoomType = $('#roomtype').val();
         });
 
         $('#scheduleBuilding').change(function () {
             $submitBtn.disabled = true;
-            roomUpdate($('#scheduleCampus').val(), $('#scheduleBuilding').val());
+            sessionStorage.setItem("scheduleBuilding", $('#scheduleBuilding').val());
+            roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
         });
 
         $('#room').change(function (){
@@ -183,6 +208,7 @@ $(document).ready(function(){
             else{
                $submitBtn.disabled = true;
            }
+            sessionStorage.setItem("room", $('#room').val());
         });
 
         $submitBtn.onclick = function() {

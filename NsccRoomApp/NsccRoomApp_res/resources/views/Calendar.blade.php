@@ -36,6 +36,8 @@
 
                 maxTime: "23:00:00",
 
+                contentHeight: "auto",
+
                 events: [
 
                         <?php
