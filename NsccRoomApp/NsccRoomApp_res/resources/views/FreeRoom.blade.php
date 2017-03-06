@@ -3,7 +3,7 @@
 @section('content')
 
     <link rel='stylesheet' href='/css/fullcalendar.css' />
-    <script src='{{asset('/js/jquery.min.js')}}'></script>
+    {{--<script src='{{asset('/js/jquery.min.js')}}'></script>--}}
     <script src='{{asset('/js/moment.min.js')}}'></script>
     <script src='{{asset('/js/fullcalendar.js')}}'></script>
 

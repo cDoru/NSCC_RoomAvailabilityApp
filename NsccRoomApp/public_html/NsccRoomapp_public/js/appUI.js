@@ -7,7 +7,8 @@
  *
  *
  */
-
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
 
 $(document).ready(function(){
     //LOAD PAGE ACTION
@@ -35,14 +36,17 @@ $(document).ready(function(){
             }
         });
 
-        if(sessionStorage.getItem("currentCampus") != null) {
-            document.getElementById('campus').value = sessionStorage.getItem("currentCampus");
-            buildingUpdate(sessionStorage.getItem("currentCampus"));
-            document.getElementById('building').value = sessionStorage.getItem("currentBuilding");
-            roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
-            document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
-            formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"), "");
+        if(isChrome || isSafari) {
+            if (sessionStorage.getItem("currentCampus") != null) {
+                document.getElementById('campus').value = sessionStorage.getItem("currentCampus");
+                buildingUpdate(sessionStorage.getItem("currentCampus"));
+                document.getElementById('building').value = sessionStorage.getItem("currentBuilding");
+                roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
+                document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
+                formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"), "");
+            }
         }
+
 
 
     //FORM ELEMENT CHANGE ACTION
@@ -172,13 +176,16 @@ $(document).ready(function(){
             }
         });
 
-        if(sessionStorage.getItem("scheduleCampus") != null) {
-            document.getElementById('scheduleCampus').value = sessionStorage.getItem("scheduleCampus");
-            scheduleBuildingUpdate(sessionStorage.getItem("scheduleCampus"));
-            document.getElementById('scheduleBuilding').value = sessionStorage.getItem("scheduleBuilding");
-            roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
-            // document.getElementById('room').value = sessionStorage.getItem("room");
+        if(isChrome || isSafari) {
+            if (sessionStorage.getItem("scheduleCampus") != null) {
+                document.getElementById('scheduleCampus').value = sessionStorage.getItem("scheduleCampus");
+                scheduleBuildingUpdate(sessionStorage.getItem("scheduleCampus"));
+                document.getElementById('scheduleBuilding').value = sessionStorage.getItem("scheduleBuilding");
+                roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
+                // document.getElementById('room').value = sessionStorage.getItem("room");
+            }
         }
+
 
 
         $('#scheduleCampus').change(function () {
