@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a977f53a-1f05-44c2-a5dd-9cbd03057ecd" name="Default" comment="Added checks for safari and chrome. Session variables don't seem to work for other browsers.">
+    <list default="true" id="a977f53a-1f05-44c2-a5dd-9cbd03057ecd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/layouts/app.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js" />
     </list>
     <ignored path="NsccRoomApp.iws" />
@@ -105,8 +103,8 @@
       <file leaf-file-name="appUI.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="212" column="43" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
+            <state relative-caret-position="706">
+              <caret line="199" column="74" selection-start-line="199" selection-start-column="74" selection-end-line="199" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -569,7 +567,7 @@
       <workItem from="1488202225566" duration="2963000" />
       <workItem from="1488299886871" duration="12825000" />
       <workItem from="1488803676011" duration="6815000" />
-      <workItem from="1488816871414" duration="3128000" />
+      <workItem from="1488816871414" duration="3334000" />
     </task>
     <task id="LOCAL-00001" summary="started front end">
       <created>1485179920732</created>
@@ -725,11 +723,18 @@
       <option name="project" value="LOCAL" />
       <updated>1488811369255</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Added checks for safari and chrome. JS session variables don't seem to work for other browsers.">
+      <created>1488820340450</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1488820340450</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162393000" />
+    <option name="totallyTimeSpent" value="162599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="28" width="1282" height="963" extended-state="6" />
@@ -811,7 +816,8 @@
     <MESSAGE value="Just some cleanup" />
     <MESSAGE value="Looking like calendar on form blades is going to be close to impossible...?" />
     <MESSAGE value="Saving combo selections to session." />
-    <option name="LAST_COMMIT_MESSAGE" value="Saving combo selections to session." />
+    <MESSAGE value="Added checks for safari and chrome. JS session variables don't seem to work for other browsers." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added checks for safari and chrome. JS session variables don't seem to work for other browsers." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -974,8 +980,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public_html/NsccRoomapp_public/js/appUI.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="212" column="43" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
+        <state relative-caret-position="706">
+          <caret line="199" column="74" selection-start-line="199" selection-start-column="74" selection-end-line="199" selection-end-column="74" />
           <folding />
         </state>
       </provider>

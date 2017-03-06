@@ -195,9 +195,9 @@ $(document).ready(function(){
                 $("#scheduleCampus option[value='0']").remove();
             }
             var $campus = $('#scheduleCampus').val();
-            sessionStorage.setItem("scheduleCampus", $campus)
+            sessionStorage.setItem("scheduleCampus", $campus);
             var $selectedBuilding = scheduleBuildingUpdate($campus);
-            sessionStorage.setItem("scheduleBuilding", $selectedBuilding)
+            sessionStorage.setItem("scheduleBuilding", $selectedBuilding);
             roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
             // var $prevSelectedRoomType = $('#roomtype').val();
         });
