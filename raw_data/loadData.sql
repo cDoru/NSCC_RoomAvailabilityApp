@@ -230,25 +230,33 @@ UPDATE BuildingsLU SET buildingName = 'Aviation Institute' WHERE building = 'AVA
 UPDATE BuildingsLU SET buildingName = 'ST CAMPUS' WHERE building = 'ST CAMPUS';
 
 
--- NEW: Create FreeRoomsNow as a dynamic view
-CREATE VIEW FreeRoomsNowView AS
- (
- SELECT DISTINCT room FROM nsccSchedule
-      WHERE room NOT IN(
-        SELECT DISTINCT room FROM nsccSchedule
-        WHERE days LIKE CONCAT('%',(
-          SELECT dayChar
-          FROM daysLU
-          WHERE id = DAYOFWEEK(NOW())
-          ), '%')
-        AND
-          (TIME(NOW()) > startTime
-          AND TIME(NOW()) < endTime)
-        AND
-          (DATE(NOW()) > startDate
-          AND DATE(NOW()) < endDate)
-      )
-);
+-- ###################################################
+-- Functions and Procedures
+-- ###################################################
+
+-- Create Function to get Atlantic Time
+
+-- Gets the current time (whether Standard or Daylight Savings for Atlantic. Works for 2017, 2018)
+-- This is a hack to deal with the fact that the database is set to EST.
+DROP FUNCTION IF EXISTS GetAtlanticNow;
+DELIMITER //
+CREATE FUNCTION GetAtlanticNow() RETURNS datetime
+BEGIN
+	DECLARE ASTNow datetime;
+    IF NOW() < STR_TO_DATE('2017-03-12 02:00:00', '%Y-%m-%d %H:%i:%s') THEN
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-04:00' ));
+	ELSEIF NOW() > STR_TO_DATE('2017-03-12 02:00:00', '%Y-%m-%d %H:%i:%s') AND
+		NOW() < STR_TO_DATE('2017-11-05 02:00:00', '%Y-%m-%d %H:%i:%s') THEN -- daylight savings starts
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-03:00' ));
+	ELSEIF NOW() > STR_TO_DATE('2017-11-05 02:00:00', '%Y-%m-%d %H:%i:%s') AND
+		NOW() < STR_TO_DATE('2018-03-11 02:00:00', '%Y-%m-%d %H:%i:%s') THEN
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-04:00' ));
+	ELSE
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-03:00' ));
+	END IF;
+	RETURN ASTNow;
+END //
+DELIMITER ;
 
 DROP PROCEDURE IF EXISTS GetFreeRoomsNow;
 DELIMITER //
@@ -260,14 +268,38 @@ CREATE PROCEDURE GetFreeRoomsNow()
         WHERE days LIKE CONCAT('%',(
           SELECT dayChar
           FROM daysLU
-          WHERE id = DAYOFWEEK(NOW())
+          WHERE id = DAYOFWEEK(GetAtlanticNow())
           ), '%')
         AND
-          (TIME(NOW()) > startTime
-          AND TIME(NOW()) < endTime)
+          (TIME(GetAtlanticNow()) > startTime
+          AND TIME(GetAtlanticNow()) < endTime)
         AND
-          (DATE(NOW()) > startDate
-          AND DATE(NOW()) < endDate)
+          (DATE(GetAtlanticNow()) > startDate
+          AND DATE(GetAtlanticNow()) < endDate)
       );
   END //
 DELIMITER ;
+
+
+-- NEW: Create FreeRoomsNow as a dynamic view (updated with Atlantic Conversion)
+DROP VIEW FreeRoomsNowView;
+CREATE VIEW FreeRoomsNowView AS
+ (
+ SELECT DISTINCT room FROM nsccSchedule
+      WHERE room NOT IN(
+        SELECT DISTINCT room FROM nsccSchedule
+        WHERE days LIKE CONCAT('%',(
+          SELECT dayChar
+          FROM daysLU
+          WHERE id = (
+			SELECT DAYOFWEEK(GetAtlanticNow())
+            )
+          ), '%')
+        AND
+          (TIME(GetAtlanticNow()) > startTime
+          AND TIME(GetAtlanticNow()) < endTime)
+        AND
+          (DATE(GetAtlanticNow()) > startDate
+          AND DATE(GetAtlanticNow()) < endDate)
+      )
+);
