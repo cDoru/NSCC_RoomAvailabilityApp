@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container col-md-6 col-md-offset-4">
+    <div class="container col-md-6 col-md-offset-3">
         <div class="row">
             <h1>NSCC Room Availability App</h1>
         </div>

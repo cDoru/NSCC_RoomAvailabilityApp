@@ -13,8 +13,8 @@
 
     <div class="container col-md-6 col-md-offset-3">
         <div class="row">
-            <h1>NSCC Room Availability App</h1>
-            <h3>Find a room's schedule</h3>
+            {{--<h1>NSCC Room Availability App</h1>--}}
+            <h3>Find Any Room's Schedule</h3>
             <form method="post" name="myform" id="myform">
                 {{ csrf_field() }}
                 <div class="form-group">
