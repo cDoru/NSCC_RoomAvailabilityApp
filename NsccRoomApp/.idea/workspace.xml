@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a977f53a-1f05-44c2-a5dd-9cbd03057ecd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" afterPath="$PROJECT_DIR$/NsccRoomApp_res/resources/views/FreeRoom.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/NsccRoomapp_public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/public_html/NsccRoomapp_public/css/bootstrap.min.css" />
     </list>
     <ignored path="NsccRoomApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -538,7 +536,7 @@
       <workItem from="1488816871414" duration="5080000" />
       <workItem from="1488988580621" duration="2740000" />
       <workItem from="1488987136988" duration="36000" />
-      <workItem from="1488987597489" duration="676000" />
+      <workItem from="1488987597489" duration="713000" />
     </task>
     <task id="LOCAL-00001" summary="started front end">
       <created>1485179920732</created>
@@ -736,15 +734,22 @@
       <option name="project" value="LOCAL" />
       <updated>1488987160637</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Trying to fix listbox for mobile">
+      <created>1488988295119</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1488988295119</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167797000" />
+    <option name="totallyTimeSpent" value="167834000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="28" width="1282" height="963" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.225" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -801,7 +806,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Free Rooms page is returning free rooms that match search criteria. However: meeting rooms, cafeteria, gymnasiums, etc. do not seem to be showing up in the results because we have no booking information for them in the nsccSchedule table." />
     <MESSAGE value="Working on front end. Calendar next.." />
     <MESSAGE value="Working on calendar. Mondays working.........." />
     <MESSAGE value="Calendar working!" />
@@ -826,7 +830,8 @@
     <MESSAGE value="Added 404 blade." />
     <MESSAGE value="Added a bootstrap theme (can be changed later). Added padding to forms. Changed the wording of some of the nav links and form headers. Removed h1's from all pages except home." />
     <MESSAGE value="Closed a div on Locate blade." />
-    <option name="LAST_COMMIT_MESSAGE" value="Closed a div on Locate blade." />
+    <MESSAGE value="Trying to fix listbox for mobile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trying to fix listbox for mobile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
