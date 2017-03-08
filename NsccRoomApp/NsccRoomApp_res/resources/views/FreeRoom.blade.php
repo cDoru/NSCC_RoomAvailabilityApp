@@ -19,8 +19,8 @@
 
     <div class="container col-md-6 col-md-offset-3">
         <div class="row">
-            <h1>NSCC Room Availability App</h1>
-            <h3>Find an available room</h3>
+            {{--<h1>NSCC Room Availability App</h1>--}}
+            <h3>Find Rooms Available Now</h3>
             <form method="post" name="myform" id="myform">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <label for="roomsbox">Rooms Available Now</label>
-                    <select size="6" name="roomsbox" id="roomsbox" class="form-control">
+                    <select size="6" name="roomsbox" id="roomsbox" class="form-control roomsbox">
                     </select>
                 </div>
 

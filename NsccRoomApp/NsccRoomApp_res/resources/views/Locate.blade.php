@@ -23,8 +23,8 @@
 
     <div class="container col-md-6 col-md-offset-3">
         <div class="row">
-            <h1>NSCC Room Availability App</h1>
-            <h3>Locate a Room (Test)</h3>
+            {{--<h1>NSCC Room Availability App</h1>--}}
+            <h3>Locate Any Room (Test)</h3>
             <form method="post" name="myform" id="myform">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -57,11 +57,7 @@
             </div>
 
         </div>
-
-
-        {{--THIS SHOULD BE SEPERATE BLADE COMPONENT --}}
-        <div id="roomstable">
-        </div>
+    </div>
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
         <script src="{{ asset('js/appUI.js') }}"></script>
