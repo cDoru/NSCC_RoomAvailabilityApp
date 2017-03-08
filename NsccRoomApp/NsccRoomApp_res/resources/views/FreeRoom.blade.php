@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <label for="roomsbox">Rooms Available Now</label>
-                    <select size="6" name="roomsbox" id="roomsbox" class="form-control">
+                    <select size="6" name="roomsbox" id="roomsbox" class="form-control roomsbox">
                     </select>
                 </div>
 
