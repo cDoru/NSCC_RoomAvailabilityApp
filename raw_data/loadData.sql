@@ -187,7 +187,7 @@ CREATE TABLE BuildingsLU AS
 	);
 
 
---NEW: Adds descriptive names of campuses to BuildingsLU
+-- NEW: Adds descriptive names of campuses to BuildingsLU
 ALTER TABLE BuildingsLU ADD COLUMN campusName VARCHAR(250);
 ALTER TABLE BuildingsLU ADD COLUMN buildingName VARCHAR(250);
 
