@@ -14,7 +14,6 @@
 Route::resource('/','HomeController');
 
 
-
 Route::get('FreeRoom/roomData/{campus}/{building}/{roomType?}/{filter?}',
     function($campus, $building, $roomType = null, $filter = null) {
         $filter = strtoupper($filter); //convert uppercase
