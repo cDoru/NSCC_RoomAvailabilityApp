@@ -83,12 +83,12 @@ Route::get('RoomSchedule/{campus}/{building}', function($campus, $building){
 });
 
 //new: route to pass json data (for map). TEMP
-Route::get('Locate/CampusJSON', function () {
-    return response()->file('media/campuses.geoJSON');
+Route::get('/Locate/CampusJSON', function () {
+    return redirect('media/campuses.txt');
 });
 
 Route::get('CampusJSON', function () {
-    return redirect('Locate/CampusJSON');
+    return redirect('/Locate/CampusJSON');
 });
 
 Route::resource('/Locate','LocateController');

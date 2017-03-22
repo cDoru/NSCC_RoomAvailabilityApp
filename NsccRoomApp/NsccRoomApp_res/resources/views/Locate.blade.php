@@ -52,12 +52,22 @@
 
         {{--THIS SHOULD BE SEPERATE BLADE COMPONENT --}}
         <div id="mapframe">
-            <div id="map" style='width: 600px; height: 400px;'>
+            <div id="map" style='width: 100%; height: 500px;'>
+                <nav id="mapmenuleft">
+                    <a href="#" id="buildingToggle">Step Into Building</a>
+                </nav>
                 <nav id="mapmenu"></nav>
             </div>
 
         </div>
-    </div>
+
+        <div id="RoomSelect1">
+            <p></p>
+        </div>
+
+        {{--THIS SHOULD BE SEPERATE BLADE COMPONENT --}}
+        <div id="roomstable1">
+        </div>
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
         <script src="{{ asset('js/appUI.js') }}"></script>
