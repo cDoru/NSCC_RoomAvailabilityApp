@@ -63,6 +63,11 @@ Route::get('FreeRoom/roomTypeData/{building}', function($building) {
     return json_encode($roomTypes);
 }); //handles ajax calls for roomtype data
 
+Route::get('FreeRoom/roomData/{roomNum}', function($roomNum){
+    $until = DB::select('CALL RoomAvailableUntil(?)',array($roomNum));
+    return json_encode($until);
+});
+
 
 Route::resource('/FreeRoom','FreeRoomController'
     ,  ['only' => ['index', 'show', 'store']]

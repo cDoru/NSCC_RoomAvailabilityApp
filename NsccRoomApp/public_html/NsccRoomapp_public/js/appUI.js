@@ -93,21 +93,34 @@ $(document).ready(function(){
 
             //get form element values
             $roomType = "";
-            if(roomType != ""){
+            if(roomType != 0){
                 $roomType = roomType;
             }
             $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
-                var $roomsObj = JSON.parse(result);
-                if($("#roomstable").length){ //if the results are displayed in a table, update table
-                    $("#roomstable").html('');
-                    
-                }
-                $("#roomsbox").html('');
-                $("#roomstable").html(result);
 
-                $( "#roomsbox" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
+                var $roomsObj = JSON.parse(result);
+                $("#roomsbox").html('');
+                // $("#roomstable").html(result);
+
+                // $( "#roomsbox" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
                 $.each($roomsObj, function() {
-                    $( "#roomsbox" ).append($("<option />").val(this.Room).text(this.Room));
+                    var $room = this.Room;
+                    $.get("/FreeRoom/roomData/" + $room, function(result2){
+                        var $until = JSON.parse(result2);
+                        if($until.length != 0){
+                            $.each($until, function(){
+                                $("#roomsbox").append($("<option />").val($room).text($room + ' | Available until ' + this.startTime + '.'));
+
+                            });
+                        }
+                        else{
+                            $("#roomsbox").append($("<option />").val($room).text($room + ' | Available until close.'));
+                        }
+
+
+                    });
+
+
                 });
 
             });
