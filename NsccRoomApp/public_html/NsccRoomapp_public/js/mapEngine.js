@@ -491,7 +491,9 @@ $(document).ready(function(){
         })
 
         //Filter Floor data
-
+        map.setFilter('Floor 1 Selection', ['in', 'Room'].concat(roomList));
+        map.setFilter('Floor 2 Selection', ['in', 'Room'].concat(roomList));
+        map.setFilter('Floor 3 Selection', ['in', 'Room'].concat(roomList));
 
     } // end add Floor Data
 
@@ -502,7 +504,7 @@ $(document).ready(function(){
             if($('#roomtype').val() != 0){
                 $roomType = $('#roomtype').val();
             }
-            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" + $roomType, function(result) {
+            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" , function(result) {
                 var $roomsObj = JSON.parse(result);
                 roomList = []
                 $.each($roomsObj, function() {
@@ -523,7 +525,7 @@ $(document).ready(function(){
             if($('#roomtype').val() != 0){
                 $roomType = $('#roomtype').val();
             }
-            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" + $roomType, function(result) {
+            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" , function(result) {
                 var $roomsObj = JSON.parse(result);
                 roomList = []
                 $.each($roomsObj, function() {
@@ -545,7 +547,7 @@ $(document).ready(function(){
             if($('#roomtype').val() != 0){
                 $roomType = $('#roomtype').val();
             }
-            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" + $roomType, function(result) {
+            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" , function(result) {
                 var $roomsObj = JSON.parse(result);
                 roomList = []
                 $.each($roomsObj, function() {
