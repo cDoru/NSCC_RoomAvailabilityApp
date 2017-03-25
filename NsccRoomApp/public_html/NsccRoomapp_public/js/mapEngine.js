@@ -453,7 +453,7 @@ $(document).ready(function(){
             },
             'source-layer': 'Floor3_RoomNames_WGS-b4dex3',
             'filter': ['==', 'Room', '##'],
-            "minzoom": 17
+            "minzoom": 17.5
         })
 
         map.addLayer({
@@ -470,7 +470,7 @@ $(document).ready(function(){
             },
             'source-layer': 'Floor2_RoomNames_WGS-5emrxt',
             'filter': ['==', 'Room', '##'],
-            "minzoom": 17
+            "minzoom": 17.5
         })
 
         map.addLayer({
@@ -487,24 +487,26 @@ $(document).ready(function(){
             },
             'source-layer': 'Floor1_RoomNames_WGS-azguv9',
             'filter': ['==', 'Room', '##'],
-            "minzoom": 17
+            "minzoom": 17.5
         })
 
         //Filter Floor data
-        map.setFilter('Floor 1 Selection', ['in', 'Room'].concat(roomList));
-        map.setFilter('Floor 2 Selection', ['in', 'Room'].concat(roomList));
-        map.setFilter('Floor 3 Selection', ['in', 'Room'].concat(roomList));
+
 
     } // end add Floor Data
 
     $('#building').change(function(){
         panMap();
+        var $roomType = "";
         if($('#building').val() == "ITC"){
-
+            if($('#roomtype').val() != 0){
+                $roomType = $('#roomtype').val();
+            }
             $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" + $roomType, function(result) {
-                JSON.parse(result);
+                var $roomsObj = JSON.parse(result);
+                roomList = []
                 $.each($roomsObj, function() {
-                    roomList.append(this.Room);
+                    roomList.push(this.Room);
                 });
             });
             loadBuildingToggle(true);
@@ -516,9 +518,11 @@ $(document).ready(function(){
 
     });
     $('#campus').change(function(){
-
+        var $roomType = "";
         if($('#building').val() == "ITC"){
-
+            if($('#roomtype').val() != 0){
+                $roomType = $('#roomtype').val();
+            }
             $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" + $roomType, function(result) {
                 var $roomsObj = JSON.parse(result);
                 roomList = []
@@ -532,6 +536,28 @@ $(document).ready(function(){
             loadBuildingToggle(false); //hide show building view button
         }
         panMap();
+
+    });
+
+    $('#roomtype').change(function(){
+        var $roomType = "";
+        if($('#building').val() == "ITC"){
+            if($('#roomtype').val() != 0){
+                $roomType = $('#roomtype').val();
+            }
+            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" + $roomType, function(result) {
+                var $roomsObj = JSON.parse(result);
+                roomList = []
+                $.each($roomsObj, function() {
+                    roomList.push(this.Room);
+                });
+            });
+            loadBuildingToggle(true);
+        }
+        else {
+            loadBuildingToggle(false); //hide show building view button
+        }
+        //panMap();
 
     });
 
@@ -650,12 +676,12 @@ $(document).ready(function(){
         if (features.length) {
             map.setFilter(floorSelection + "-Hover", ["==", "Room", features[0].properties.Room]);
             map.setFilter(floor + " RoomLabels", ["==", "Room", features[0].properties.Room]);
-            //$('#RoomSelect').html(features[0].properties.Room);
+            $('#RoomSelect').html(features[0].properties.Room);
         } else {
             map.setFilter(floorSelection + "-Hover", ["==", "Room", "##"]);
             map.setFilter(floor + " RoomLabels", ["==", "Room", "##"]);
             //nothing selected
-            //$('#RoomSelect').html("");
+            $('#RoomSelect').html("");
         }
 
     }
