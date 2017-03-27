@@ -1,4 +1,4 @@
-//Hello
+//Hello3
 /**
  * Created by inet2005 on 2/13/17 by RSutcliffe
  *
@@ -99,7 +99,7 @@ $(document).ready(function(){
                 $("#campus option[value='0']").remove();
             }
             var $campus = $('#campus').val();
-            sessionStorage.setItem("currentCampus", $campus)
+            sessionStorage.setItem("currentCampus", $campus);
             var $selectedBuilding = buildingUpdate(sessionStorage.getItem("currentCampus"));
             sessionStorage.setItem("currentBuilding", $selectedBuilding);
             var $prevSelectedRoomType = $('#roomtype').val();
