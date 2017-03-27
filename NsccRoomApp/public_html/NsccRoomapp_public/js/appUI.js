@@ -104,7 +104,7 @@ $(document).ready(function(){
             sessionStorage.setItem("currentBuilding", $selectedBuilding);
             var $prevSelectedRoomType = $('#roomtype').val();
             var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
-            formUpdate($('#campus').val(), $('#building').val(), sessionStorage.getItem("currentRoomType"), "");
+            formUpdate($('#campus').val(), $('#building').val(), $prevSelectedRoomType, "");
         });
 
         $('#building').change(function(){
