@@ -88,32 +88,33 @@ $(document).ready(function(){
             formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
         });
 
-        function formUpdate(campus, building, roomType, filter){
+        function formUpdate(campus, building, roomType, filter) {
             //called when all form items are populated and ready to fetch room data
 
             //get form element values
-            $roomType = "";
-            if(roomType != 0){
+                $roomType = "";
+            if (roomType != 0) {
                 $roomType = roomType;
             }
-            $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
+            if (!$('#mapframe').length){
+            $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function (result) {
 
                 var $roomsObj = JSON.parse(result);
                 $("#roomsbox").html('');
                 // $("#roomstable").html(result);
 
                 // $( "#roomsbox" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
-                $.each($roomsObj, function() {
+                $.each($roomsObj, function () {
                     var $room = this.Room;
-                    $.get("/FreeRoom/roomData/" + $room, function(result2){
+                    $.get("/FreeRoom/roomData/" + $room, function (result2) {
                         var $until = JSON.parse(result2);
-                        if($until.length != 0){
-                            $.each($until, function(){
+                        if ($until.length != 0) {
+                            $.each($until, function () {
                                 $("#roomsbox").append($("<option />").val($room).text($room + ' | Available until ' + this.startTime + '.'));
 
                             });
                         }
-                        else{
+                        else {
                             $("#roomsbox").append($("<option />").val($room).text($room + ' | Available until close.'));
                         }
 
@@ -124,6 +125,7 @@ $(document).ready(function(){
                 });
 
             });
+        }
         }
 
     }///////////////////////////////////////////////////////
