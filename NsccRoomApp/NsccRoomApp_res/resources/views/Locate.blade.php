@@ -61,12 +61,12 @@
 
         </div>
 
-        <div id="RoomSelect1">
+        <div id="RoomSelect">
             <p></p>
         </div>
 
         {{--THIS SHOULD BE SEPERATE BLADE COMPONENT --}}
-        <div id="roomstable1">
+        <div id="roomstable">
         </div>
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />

@@ -1,3 +1,4 @@
+
 /**
  * Created by inet2005 on 2/13/17 by RSutcliffe
  *
@@ -6,23 +7,46 @@
  *
  *
  */
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
 
 $(document).ready(function(){
     //LOAD PAGE ACTION
     if($buildingsObj) {
-        //get a list of campuses
+
+        var $button1 = document.getElementById('button1');
+        $button1.disabled = true;
+
+        //get a list of campuses (indexOf not supported in IE8?)
         $campusesList = [];
+        $list = [];
+        for (var i = 0; i < $buildingsObj.length; i++) {
+            // if ($campusesList.indexOf($buildingsObj[i]) ==-1){
+            $campusesList.push($buildingsObj[i]);
+
+            // }
+        }
 
         //populate campus list
-        $.each($buildingsObj, function () {
-            if (!$campusesList.includes(this.campus)) {
-                $campusesList.push(this.campus);
-                //if blade has a campus dropdown element, populate it
-                if($('#campus').length) {
-                    $("#campus").append($("<option />").val(this.campus).text(this.campusName));
-                }
+        $.each($campusesList, function () {
+
+            if (!$list.includes(this.campus)) {
+                $("#campus").append($("<option />").val(this.campus).text(this.campusName));
+                $list.push(this.campus);
             }
         });
+
+        if(isChrome || isSafari) {
+            if (sessionStorage.getItem("currentCampus") != null) {
+                document.getElementById('campus').value = sessionStorage.getItem("currentCampus");
+                buildingUpdate(sessionStorage.getItem("currentCampus"));
+                document.getElementById('building').value = sessionStorage.getItem("currentBuilding");
+                roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
+                document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
+                formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"), "");
+            }
+        }
+
 
 
         //FORM ELEMENT CHANGE ACTION
@@ -69,70 +93,72 @@ $(document).ready(function(){
 
 
         $('#campus').change(function(){
+            $button1.disabled = true;
             //campus item change
             if($("#campus option[value='0']").length > 0){
                 $("#campus option[value='0']").remove();
             }
             var $campus = $('#campus').val();
-            var $selectedBuilding = buildingUpdate($campus);
+            sessionStorage.setItem("currentCampus", $campus)
+            var $selectedBuilding = buildingUpdate(sessionStorage.getItem("currentCampus"));
+            sessionStorage.setItem("currentBuilding", $selectedBuilding);
             var $prevSelectedRoomType = $('#roomtype').val();
             var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
-            formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
+            formUpdate($('#campus').val(), $('#building').val(), sessionStorage.getItem("currentRoomType"), "");
         });
 
         $('#building').change(function(){
+            $button1.disabled = true;
+            sessionStorage.setItem("currentBuilding", $('#building').val());
+            var $prevSelectedRoomType = $('#roomtype').val();
+            var $selectedRoomType = roomTypeUpdate($('#building').val(), $prevSelectedRoomType);
             formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
         });
 
         $('#roomtype').change(function(){
+            $button1.disabled = true;
+            sessionStorage.setItem("currentRoomType", $('#roomtype').val());
             formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
         });
 
-        function formUpdate(campus, building, roomType, filter) {
+        $('#roomsbox').change(function () {
+            $button1.disabled = false;
+            // window.location = "/RoomSchedule/" + $('#roomsbox').val().toString();
+        });
+
+        $button1.onclick = function() {
+            // var $url = "/RoomSchedule/" + $('#room').val().toString();
+            window.location = "/RoomSchedule/" + $('#roomsbox').val().toString();
+        };
+
+
+        function formUpdate(campus, building, roomType, filter){
             //called when all form items are populated and ready to fetch room data
 
             //get form element values
-                $roomType = "";
-            if (roomType != 0) {
+            $roomType = "";
+            if(roomType != 0){
                 $roomType = roomType;
             }
-            if (!$('#mapframe').length){
-            $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function (result) {
+            $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
 
                 var $roomsObj = JSON.parse(result);
                 $("#roomsbox").html('');
                 // $("#roomstable").html(result);
 
                 // $( "#roomsbox" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
-                $.each($roomsObj, function () {
-                    var $room = this.Room;
-                    $.get("/FreeRoom/roomData/" + $room, function (result2) {
-                        var $until = JSON.parse(result2);
-                        if ($until.length != 0) {
-                            $.each($until, function () {
-                                $("#roomsbox").append($("<option />").val($room).text($room + ' | Available until ' + this.startTime + '.'));
-
-                            });
-                        }
-                        else {
-                            $("#roomsbox").append($("<option />").val($room).text($room + ' | Available until close.'));
-                        }
-
-
-                    });
-
-
+                $.each($roomsObj, function() {
+                    $( "#roomsbox" ).append($("<option />").val(this.Room).text(this.Room));
                 });
 
             });
-        }
         }
 
     }///////////////////////////////////////////////////////
     else if($scheduleBuildingsObj){
 
         var $submitBtn = document.getElementById('button');
-        $submitBtn.disabled = 'true';
+        $submitBtn.disabled = true;
 
         $campusesList = [];
         $list = [];
@@ -152,31 +178,46 @@ $(document).ready(function(){
             }
         });
 
+        if(isChrome || isSafari) {
+            if (sessionStorage.getItem("scheduleCampus") != null) {
+                document.getElementById('scheduleCampus').value = sessionStorage.getItem("scheduleCampus");
+                scheduleBuildingUpdate(sessionStorage.getItem("scheduleCampus"));
+                document.getElementById('scheduleBuilding').value = sessionStorage.getItem("scheduleBuilding");
+                roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
+                // document.getElementById('room').value = sessionStorage.getItem("room");
+            }
+        }
+
+
 
         $('#scheduleCampus').change(function () {
-            $submitBtn.disabled = 'true';
+            $submitBtn.disabled = true;
             //campus item change
             if ($("#scheduleCampus option[value='0']").length > 0) {
                 $("#scheduleCampus option[value='0']").remove();
             }
             var $campus = $('#scheduleCampus').val();
+            sessionStorage.setItem("scheduleCampus", $campus);
             var $selectedBuilding = scheduleBuildingUpdate($campus);
-            roomUpdate($('#scheduleCampus').val(), $selectedBuilding);
+            sessionStorage.setItem("scheduleBuilding", $selectedBuilding);
+            roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
             // var $prevSelectedRoomType = $('#roomtype').val();
         });
 
         $('#scheduleBuilding').change(function () {
-            $submitBtn.disabled = 'true';
-            roomUpdate($('#scheduleCampus').val(), $('#scheduleBuilding').val());
+            $submitBtn.disabled = true;
+            sessionStorage.setItem("scheduleBuilding", $('#scheduleBuilding').val());
+            roomUpdate(sessionStorage.getItem("scheduleCampus"), sessionStorage.getItem("scheduleBuilding"));
         });
 
         $('#room').change(function (){
             if($('#room').val() != 0){
-                $submitBtn.disabled = !$submitBtn.disabled;
+                $submitBtn.disabled = false;
             }
             else{
-                $submitBtn.disabled = 'true';
+                $submitBtn.disabled = true;
             }
+            sessionStorage.setItem("room", $('#room').val());
         });
 
         $submitBtn.onclick = function() {
