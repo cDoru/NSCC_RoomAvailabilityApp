@@ -143,7 +143,6 @@ $(document).ready(function(){
         }
 
 
-
         function formUpdate(campus, building, roomType, filter){
             //called when all form items are populated and ready to fetch room data
 

@@ -7,7 +7,6 @@
     <script src='{{asset('/js/moment.min.js')}}'></script>
     <script src='{{asset('/js/fullcalendar.js')}}'></script>
 
-
     <script>
         $(document).ready(function(){
             var $buildingsList = '{!! json_encode($buildingsList)!!}';
