@@ -229,6 +229,38 @@ UPDATE BuildingsLU SET buildingName = 'Aviation Institute' WHERE building = 'AVA
 UPDATE BuildingsLU SET buildingName = 'ST CAMPUS' WHERE building = 'ST CAMPUS';
 
 
+
+-- ###################################################
+-- Functions and Procedures
+-- ###################################################
+
+-- Create Function to get Atlantic Time
+
+-- Gets the current time (whether Standard or Daylight Savings for Atlantic. Works for 2017, 2018)
+-- This is a hack to deal with the fact that the database is set to EST.
+DROP FUNCTION IF EXISTS GetAtlanticNow;
+DELIMITER //
+CREATE FUNCTION GetAtlanticNow() RETURNS datetime
+BEGIN
+	DECLARE ASTNow datetime;
+    IF NOW() < STR_TO_DATE('2017-03-12 02:00:00', '%Y-%m-%d %H:%i:%s') THEN
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-04:00' ));
+	ELSEIF NOW() > STR_TO_DATE('2017-03-12 02:00:00', '%Y-%m-%d %H:%i:%s') AND
+		NOW() < STR_TO_DATE('2017-11-05 02:00:00', '%Y-%m-%d %H:%i:%s') THEN -- daylight savings starts
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-03:00' ));
+	ELSEIF NOW() > STR_TO_DATE('2017-11-05 02:00:00', '%Y-%m-%d %H:%i:%s') AND
+		NOW() < STR_TO_DATE('2018-03-11 02:00:00', '%Y-%m-%d %H:%i:%s') THEN
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-04:00' ));
+	ELSE
+		SET ASTNow = (SELECT CONVERT_TZ(NOW(), @@session.time_zone,  '-03:00' ));
+	END IF;
+	RETURN ASTNow;
+END //
+DELIMITER ;
+
+
+
+
 -- NEW: Create FreeRoomsNow as a dynamic view
 DROP VIEW IF EXISTS FreeRoomsNowView;
 CREATE VIEW FreeRoomsNowView AS
@@ -239,7 +271,7 @@ CREATE VIEW FreeRoomsNowView AS
         WHERE days LIKE CONCAT('%',(
           SELECT dayChar
           FROM daysLU
-          WHERE id = DAYOFWEEK(NOW())
+          WHERE id = DAYOFWEEK(GetAtlanticNow())
           ), '%')
         AND
           (TIME(NOW()) > startTime
@@ -260,7 +292,7 @@ CREATE PROCEDURE GetFreeRoomsNow()
         WHERE days LIKE CONCAT('%',(
           SELECT dayChar
           FROM daysLU
-          WHERE id = DAYOFWEEK(NOW())
+          WHERE id = DAYOFWEEK(GetAtlanticNow())
           ), '%')
         AND
           (TIME(NOW()) > startTime
@@ -281,19 +313,47 @@ CREATE PROCEDURE RoomAvailableUntil(IN roomNum VARCHAR(255))
 	BEGIN
       SELECT startTime FROM nsccSchedule
 		WHERE room = roomNum
-		AND	(DATE(NOW()) > startDate
-		AND DATE(NOW()) < endDate)
+		AND	(DATE(GetAtlanticNow()) > startDate
+		AND DATE(GetAtlanticNow()) < endDate)
         
 		AND days LIKE CONCAT('%',(
 			SELECT dayChar 
 			FROM daysLU 
-			WHERE id = DAYOFWEEK(NOW())
+			WHERE id = DAYOFWEEK(GetAtlanticNow())
 		), '%')
         
-		AND startTime > TIME(NOW())
+		AND startTime > TIME(GetAtlanticNow())
 		ORDER BY startTime ASC
 		LIMIT 1;
 	END//
 DELIMITER ;
 
+-- Get Rooms Until As a Function
+DROP FUNCTION IF EXISTS RoomAvailableUntil;
+DELIMITER //
+CREATE FUNCTION RoomAvailableUntil(roomNum VARCHAR(255),
+		nowTime VARCHAR(255)) RETURNS time
+BEGIN
+	DECLARE nextTime TIME;
+
+	SELECT MIN(startTime) INTO nextTime
+		FROM nsccSchedule
+		WHERE room = roomNum
+
+		AND	(DATE(GetAtlanticNow()) > startDate
+		AND DATE(GetAtlanticNow()) < endDate)
+
+		AND days LIKE CONCAT('%',
+        (
+			SELECT dayChar
+			FROM daysLU
+			WHERE id = DAYOFWEEK(GetAtlanticNow())
+		), '%')
+
+    -- Input time should be like so: '11:15 AM'
+		AND startTime > TIME(STR_TO_DATE(nowTime, '%h:%i %p'));
+
+	RETURN nextTime;
+END//
+DELIMITER ;
 
