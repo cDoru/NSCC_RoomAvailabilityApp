@@ -68,6 +68,23 @@ Route::get('FreeRoom/roomData/{roomNum}', function($roomNum){
     return json_encode($until);
 });
 
+//New: Clone of RoomAvailUntil via function
+Route::get('FreeRoomUntil/roomData/{campus}/{building}/{fromTime?}',
+    function($campus, $building, $fromTime = null){
+        if($fromTime == null){
+            $fromTime = date('Hi');
+        }
+        $str = "Room, RoomAvailableUntil(Room,'. $fromTime . ') as AvailUntil";
+        //Assumes Building is Populated:
+        $matchingRooms = DB::table('nsccSchedule')
+                ->select(DB::raw("Room, RoomAvailableUntil(Room,'$fromTime') as AvailUntil"))
+                ->where('Campus', '=',$campus)
+                ->where('Building', '=', $building)
+                ->distinct()
+                ->get();
+        return json_encode($matchingRooms);
+
+});
 
 Route::resource('/FreeRoom','FreeRoomController'
     ,  ['only' => ['index', 'show', 'store']]
