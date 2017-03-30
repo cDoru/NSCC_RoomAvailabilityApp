@@ -351,7 +351,7 @@ BEGIN
 		), '%')
 
     -- Input time should be like so: '11:15 AM'
-		AND startTime > TIME(STR_TO_DATE(nowTime, '%h:%i %p'));
+		AND startTime > TIME(STR_TO_DATE(nowTime, '%H%i'));
 
 	RETURN nextTime;
 END//
