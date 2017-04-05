@@ -63,8 +63,19 @@ Route::get('FreeRoom/roomTypeData/{building}', function($building) {
     return json_encode($roomTypes);
 }); //handles ajax calls for roomtype data
 
-Route::get('FreeRoom/roomData/{roomNum}', function($roomNum){
-    $until = DB::select('CALL RoomAvailableUntil(?)',array($roomNum));
+//Route to get avail until for SINGLE ROOM
+Route::get('FreeRoomUntil/{roomNum}/{onDayStr?}/{strTime?}', function($roomNum, $onDayStr = null, $strTime = null){
+
+    if($strTime == null){
+        $strTime = Date('%H%i');
+    }
+    if($onDayStr == 'Today'){
+        $onDayNo = date('N') + 1;
+    }
+    else {
+        $onDayNo = date('N', strtotime($onDayStr)) + 1;
+    }
+    $until = DB::select('SELECT RoomAvailableUntil(?,?,?) as AvailUntil',array($roomNum, $strTime, $onDayNo));
     return json_encode($until);
 });
 

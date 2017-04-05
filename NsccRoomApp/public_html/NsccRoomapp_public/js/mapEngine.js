@@ -713,9 +713,13 @@ $(document).ready(function(){
 
         if (features.length) {
             map.flyTo({center: polylabel(features[0].geometry.coordinates, 1.0)});
-            $.get("/FreeRoom/" + features[0].properties.Room , function(result) {
-                if(result != ""){
-                    var $roomAvail = "Room available until " + String(JSON.parse(result)[0]);
+            var $myTime = ConvertTimeformat("24", $('#timepicker1').val());
+            var $roomsWUntilObj;
+            $.get("FreeRoomUntil/" + features[0].properties.Room + "/" + "Today" + "/" + $myTime, function(result) {
+                var $roomAvail;
+                $roomsWUntilObj = JSON.parse(result)[0].AvailUntil;
+                if($roomsWUntilObj != null){
+                    $roomAvail = "Room available until " + $roomsWUntilObj;
                 }
                 else {
                     $roomAvail = "Room Available rest of day";
@@ -729,7 +733,6 @@ $(document).ready(function(){
                         '">Schedule</a></p>')
                     //.setLngLat(feature.geometry.coordinates)
                     .addTo(map);
-
             });
 
             // Get coordinates from the symbol and center the map on those coordinates
@@ -1059,5 +1062,19 @@ $(document).ready(function(){
         data[i] = data[j];
         data[j] = tmp;
     }
-
+    //This IS A DUPLICATE OF APPUI> NEEDS REfactoring [ToDo]
+    //Parse time to 24 hours: http://stackoverflow.com/questions/15083548/convert-12-hour-hhmm-am-pm-to-24-hour-hhmm
+    function ConvertTimeformat(format, str) {
+        var time = str;
+        var hours = Number(time.match(/^(\d+)/)[1]);
+        var minutes = Number(time.match(/:(\d+)/)[1]);
+        var AMPM = time.match(/\s(.*)$/)[1];
+        if (AMPM == "PM" && hours < 12) hours = hours + 12;
+        if (AMPM == "AM" && hours == 12) hours = hours - 12;
+        var sHours = hours.toString();
+        var sMinutes = minutes.toString();
+        if (hours < 10) sHours = "0" + sHours;
+        if (minutes < 10) sMinutes = "0" + sMinutes;
+        return (sHours + "" + sMinutes);
+    }
 });
