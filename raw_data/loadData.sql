@@ -308,31 +308,34 @@ DELIMITER ;
 -- PROCEDURE to get next booking of given room.
 DROP PROCEDURE IF EXISTS RoomAvailableUntil;
 DELIMITER //
-CREATE PROCEDURE RoomAvailableUntil(IN roomNum VARCHAR(255))
-	
-	BEGIN
+CREATE PROCEDURE `RoomAvailableUntil`(
+	IN roomNum VARCHAR(255), IN timeStr VARCHAR(255))
+BEGIN
+	IF timeStr IS NULL THEN
+		SET timeStr = TIME(NOW());
+	END IF;
       SELECT startTime FROM nsccSchedule
 		WHERE room = roomNum
-		AND	(DATE(GetAtlanticNow()) > startDate
-		AND DATE(GetAtlanticNow()) < endDate)
-        
+		AND	(DATE(NOW()) > startDate
+		AND DATE(NOW()) < endDate)
+
 		AND days LIKE CONCAT('%',(
-			SELECT dayChar 
-			FROM daysLU 
-			WHERE id = DAYOFWEEK(GetAtlanticNow())
+			SELECT dayChar
+			FROM daysLU
+			WHERE id = DAYOFWEEK(NOW())
 		), '%')
-        
-		AND startTime > TIME(GetAtlanticNow())
+
+		AND startTime > TIME(STR_TO_DATE(timeStr,'%H%i'))
 		ORDER BY startTime ASC
 		LIMIT 1;
 	END//
 DELIMITER ;
 
--- Get Rooms Until As a Function
+-- Get Rooms Until As a Function (REVISED, now takes time, day of week)
 DROP FUNCTION IF EXISTS RoomAvailableUntil;
 DELIMITER //
-CREATE FUNCTION RoomAvailableUntil(roomNum VARCHAR(255),
-		nowTime VARCHAR(255)) RETURNS time
+CREATE FUNCTION `RoomAvailableUntil`(roomNum VARCHAR(255),
+		nowTime VARCHAR(255), dayNum INTEGER) RETURNS time
 BEGIN
 	DECLARE nextTime TIME;
 
@@ -340,17 +343,17 @@ BEGIN
 		FROM nsccSchedule
 		WHERE room = roomNum
 
-		AND	(DATE(GetAtlanticNow()) > startDate
-		AND DATE(GetAtlanticNow()) < endDate)
+		AND	(DATE(NOW()) > startDate
+		AND DATE(NOW()) < endDate)
 
 		AND days LIKE CONCAT('%',
         (
 			SELECT dayChar
 			FROM daysLU
-			WHERE id = DAYOFWEEK(GetAtlanticNow())
+			WHERE id = dayNum
 		), '%')
 
-    -- Input time should be like so: '11:15 AM'
+    -- Input time should be like so: '1815'
 		AND startTime > TIME(STR_TO_DATE(nowTime, '%H%i'));
 
 	RETURN nextTime;
