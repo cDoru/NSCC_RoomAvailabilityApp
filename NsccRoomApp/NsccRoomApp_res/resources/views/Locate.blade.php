@@ -3,8 +3,10 @@
 @section('content')
 
     <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/bootstrap-timepicker.css" />
     {{--<script src="https://code.jquery.com/jquery-1.10.2.js"></script> --}}
 
+    <script src=" {{ asset('js/bootstrap-timepicker.js') }}"></script>
 
     <script>
 
@@ -48,6 +50,15 @@
             </form>
         </div>
 
+        <div class="input-group bootstrap-timepicker timepicker">
+
+            <input id="timepicker1" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+        </div>
+
+        <script type="text/javascript">
+            $('#timepicker1').timepicker();
+        </script>
 
 
         {{--THIS SHOULD BE SEPERATE BLADE COMPONENT --}}

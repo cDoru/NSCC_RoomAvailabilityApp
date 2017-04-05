@@ -68,20 +68,23 @@ Route::get('FreeRoom/roomData/{roomNum}', function($roomNum){
     return json_encode($until);
 });
 
-//New: Clone of RoomAvailUntil via function
-Route::get('FreeRoomUntil/roomData/{campus}/{building}/{fromTime?}',
-    function($campus, $building, $fromTime = null){
-        if($fromTime == null){
-            $fromTime = date('Hi');
+//New: Variant of RoomAvailUntil via function and with date time variables
+Route::get('FreeRoomUntil/roomData/{campus}/{building}/{fromTime}/{onDayStr}/{roomType?}',
+    function($campus, $building, $fromTime, $onDayStr, $roomType = null){
+
+        if($onDayStr == 'Today'){
+            $onDayNo = date('N') + 1;
         }
-        $str = "Room, RoomAvailableUntil(Room,'. $fromTime . ') as AvailUntil";
-        //Assumes Building is Populated:
-        $matchingRooms = DB::table('nsccSchedule')
-                ->select(DB::raw("Room, RoomAvailableUntil(Room,'$fromTime') as AvailUntil"))
-                ->where('Campus', '=',$campus)
-                ->where('Building', '=', $building)
-                ->distinct()
-                ->get();
+        else {
+            $onDayNo = date('N', strtotime($onDayStr)) + 1;
+        }
+        if(!$roomType){
+            $roomType = "";
+        }
+
+        //No roomType provided
+        $matchingRooms = DB::select('CALL RoomAvailUntilBatch(?,?,?,?,?)', array($campus, $building, $fromTime,$onDayNo, $roomType));
+
         return json_encode($matchingRooms);
 
 });

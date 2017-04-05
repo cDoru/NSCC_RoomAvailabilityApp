@@ -45,7 +45,8 @@ $(document).ready(function(){
                 document.getElementById('building').value = sessionStorage.getItem("currentBuilding");
                 roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
                 document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
-                formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"), "");
+                formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"),
+                    ConvertTimeformat("24", $('#timepicker1')).val(), "Monday", sessionStorage.getItem("currentRoomType"), "");
             }
         }
 
@@ -108,7 +109,7 @@ $(document).ready(function(){
             sessionStorage.setItem("currentBuilding", $selectedBuilding);
             var $prevSelectedRoomType = $('#roomtype').val();
             var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
-            formUpdate($('#campus').val(), $('#building').val(), $prevSelectedRoomType, "");
+            formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $prevSelectedRoomType, "");
         });
 
         $('#building').change(function(){
@@ -118,7 +119,7 @@ $(document).ready(function(){
             sessionStorage.setItem("currentBuilding", $('#building').val());
             var $prevSelectedRoomType = $('#roomtype').val();
             var $selectedRoomType = roomTypeUpdate($('#building').val(), $prevSelectedRoomType);
-            formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
+            formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $('#roomtype').val(), "");
         });
 
         $('#roomtype').change(function(){
@@ -126,9 +127,16 @@ $(document).ready(function(){
                 $('#button1').prop("disabled",true);
             }
             sessionStorage.setItem("currentRoomType", $('#roomtype').val());
-            formUpdate($('#campus').val(), $('#building').val(), $('#roomtype').val(), "");
+            formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $('#roomtype').val(), "");
         });
 
+        $('#timepicker1').change(function(){
+
+            sessionStorage.setItem("currentTime", $('#timepicker1').val());
+            var $prevSelectedTime = $('#timepicker1').val();
+            formUpdate($('#campus').val(), $('#building').val(),  ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $('#roomtype').val(), "");
+
+        })
         $('#roomsbox').change(function () {
             if($('#button1').length) {
                 $('#button1').prop("disabled",false);
@@ -143,12 +151,12 @@ $(document).ready(function(){
         }
 
 
-        function formUpdate(campus, building, roomType, filter){
+        function formUpdate(campus, building, fromTime, onStrDate, roomType, filter){
             //called when all form items are populated and ready to fetch room data
 
             //get form element values
             $roomType = "";
-            if(roomType != 0){
+            if(roomType != 0 && roomType != null){
                 $roomType = roomType;
             }
             $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
@@ -160,9 +168,51 @@ $(document).ready(function(){
                 // $( "#roomsbox" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
                 $.each($roomsObj, function() {
                     $( "#roomsbox" ).append($("<option />").val(this.Room).text(this.Room));
+                })
+                
+                //New: Count amount of records returned and getAvailableUntil from that
+                var $roomsWUntilObj;
+                //If lots of records do a big batch request
+                $.get("/FreeRoomUntil/roomData/" + campus + "/" + building + "/" + fromTime + "/" +
+                            onStrDate + "/" + $roomType, function(result) {
+                    $roomsWUntilObj = JSON.parse(result);
+                })
+                //When done update records
+                .done(function() {
+                    $("#roomsbox").html('');
+                    $.each($roomsWUntilObj, function() {
+                        var $AvailMsg;
+
+                        if(this.AvailUntil != null){
+                            var $timeLength = getTimeLength(fromTime, this.AvailUntil);
+                            var $hrLength = Math.floor($timeLength/60);
+                            var $minLength = $timeLength % 60;
+                            if($timeLength >= 120){
+                                $AvailMsg = "Available for next ~" + $hrLength + " hours";
+                            }
+                            else if($timeLength > 60) {
+                                $AvailMsg = "Available for next hour and " + $minLength + " mins";
+                            }
+                            else if($timeLength == 60){
+                                $AvailMsg = "Available for next hour";
+                            }
+                            else {
+                                $AvailMsg = "Available for next " + $minLength + " minutes";
+                            }
+                        }
+                        else {
+                            $AvailMsg = "Available rest of day";
+                        }
+
+                        $( "#roomsbox" ).append($("<option />").val(this.Room).text(this.Room + " | " + $AvailMsg));
+                    })
                 });
 
+
+
             });
+
+
         }
 
     }///////////////////////////////////////////////////////
@@ -273,4 +323,58 @@ $(document).ready(function(){
         }
     }
 
+    //Parse time to 24 hours: http://stackoverflow.com/questions/15083548/convert-12-hour-hhmm-am-pm-to-24-hour-hhmm
+    function ConvertTimeformat(format, str) {
+        var time = str;
+        var hours = Number(time.match(/^(\d+)/)[1]);
+        var minutes = Number(time.match(/:(\d+)/)[1]);
+        var AMPM = time.match(/\s(.*)$/)[1];
+        if (AMPM == "PM" && hours < 12) hours = hours + 12;
+        if (AMPM == "AM" && hours == 12) hours = hours - 12;
+        var sHours = hours.toString();
+        var sMinutes = minutes.toString();
+        if (hours < 10) sHours = "0" + sHours;
+        if (minutes < 10) sMinutes = "0" + sMinutes;
+        return (sHours + "" + sMinutes);
+    }
+    //Get timelength difference
+    //this is a hack. It should use real date diff functionality
+    function getTimeLength(startTime, endTime) {
+        var $endTimeStr = endTime.toString();
+        var hours = Number($endTimeStr.match(/^(\d+)/)[1]);
+        var minutes = Number($endTimeStr.match(/:(\d+)/)[1]);
+        var $endTimeDate =  new Date(1,1,1,hours,minutes);
+        var $startTimeDate = new Date(1,1,1, startTime.toString().substr(0,2), startTime.toString().substr(2,2));
+        var $diff = ($endTimeDate - $startTimeDate) / 36000;
+        return $diff;
+    }
+
+    function getDayofWeek(time){
+        var $day = time.getDay();
+        //return "Wednesday";
+        if($day === 0){
+            return "Sunday";
+        }
+        else if($day === 1){
+            return "Monday";
+        }
+        else if($day === 2){
+            return "Tuesday";
+        }
+        else if($day === 3){
+            return "Wednesday";
+        }
+        else if($day === 4){
+            return "Thursday";
+        }
+        else if($day === 5){
+            return "Friday";
+        }
+        else if($day === 6){
+            return "Saturday";
+        }
+        else {
+            return null;
+        }
+    }
 });

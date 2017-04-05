@@ -712,18 +712,31 @@ $(document).ready(function(){
         var features = map.queryRenderedFeatures(event.point, { layers: [floor] });
 
         if (features.length) {
-            // Get coordinates from the symbol and center the map on those coordinates
-            //alert(features[0].geometry.coordinates);
             map.flyTo({center: polylabel(features[0].geometry.coordinates, 1.0)});
-            //alert(polylabel(features[0].geometry.coordinates, 1.0));
-            var popup = new mapboxgl.Popup({ offset: [0, -15] })
-                .setLngLat(polylabel(features[0].geometry.coordinates, 1.0))
-                .setHTML('<p>' + features[0].properties.Room + '</p>' +
-                        '<p> Room Available Until ----</p>' +
+            $.get("/FreeRoom/" + features[0].properties.Room , function(result) {
+                if(result != ""){
+                    var $roomAvail = "Room available until " + String(JSON.parse(result)[0]);
+                }
+                else {
+                    $roomAvail = "Room Available rest of day";
+                }
+
+                var popup = new mapboxgl.Popup({ offset: [0, -15] })
+                    .setLngLat(polylabel(features[0].geometry.coordinates, 1.0))
+                    .setHTML('<p>' + features[0].properties.Room + '</p>' +
+                        '<p>' + $roomAvail + '</p>' +
                         '<p><a href="' + '/RoomSchedule/' + features[0].properties.Room +
                         '">Schedule</a></p>')
-                //.setLngLat(feature.geometry.coordinates)
-                .addTo(map);
+                    //.setLngLat(feature.geometry.coordinates)
+                    .addTo(map);
+
+            });
+
+            // Get coordinates from the symbol and center the map on those coordinates
+            //alert(features[0].geometry.coordinates);
+
+            //alert(polylabel(features[0].geometry.coordinates, 1.0));
+
         }
 
     }
