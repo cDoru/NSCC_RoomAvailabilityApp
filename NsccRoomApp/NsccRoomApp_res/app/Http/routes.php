@@ -129,3 +129,9 @@ Route::get('CampusJSON', function () {
 
 Route::resource('/Locate','LocateController');
 
+
+//NEW: Call to directly get list of buildings as JSON (for map and API calls)
+Route::get('RoomsList/getJSON', function () {
+    $result = DB::table('BuildingsLU')->orderBy('campus')->orderBy('building')->get();
+    return json_encode($result);
+});
