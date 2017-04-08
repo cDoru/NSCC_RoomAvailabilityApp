@@ -331,6 +331,39 @@ BEGIN
 	END//
 DELIMITER ;
 
+-- Get Rooms avail Until in a Procedure Call as Batch
+DROP PROCEDURE IF EXISTS RoomAvailUntilBatch;
+DELIMITER //
+CREATE PROCEDURE `RoomAvailUntilBatch`(
+	IN campus VARCHAR(15), IN building VARCHAR(15),
+    IN timeStr VARCHAR(255), IN dayInt INTEGER, IN roomType VARCHAR(255))
+BEGIN
+	IF roomType IS NULL THEN
+		SET roomType = '';
+	END IF;
+	SELECT r.Room, RoomAvailableUntil(r.Room, timeStr, dayInt) as AvailUntil
+	FROM Rooms r
+	WHERE r.Campus = campus
+    AND r.Building = building
+    AND r.RoomType LIKE CONCAT(roomType, '%')
+	AND room NOT IN(
+        SELECT DISTINCT room FROM nsccSchedule
+        WHERE days LIKE CONCAT('%',(
+          SELECT dayChar
+          FROM daysLU
+          WHERE id = dayInt
+          ), '%')
+        AND
+          (TIME(STR_TO_DATE(timeStr,'%H%i')) > startTime
+          AND TIME(STR_TO_DATE(timeStr,'%H%i')) < endTime)
+        AND
+          (DATE(GetAtlanticNow()) > startDate
+          AND DATE(GetAtlanticNow()) < endDate)
+      );
+END//
+DELIMITER ;
+
+
 -- Get Rooms Until As a Function (REVISED, now takes time, day of week)
 DROP FUNCTION IF EXISTS RoomAvailableUntil;
 DELIMITER //
