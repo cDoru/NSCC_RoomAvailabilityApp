@@ -61,6 +61,7 @@ $(document).ready(function(){
 
                     $("#campus").prop("disabled", true);
                     $("#building").prop("disabled", true);
+
                     map.on("zoomend", redrawMarkers) //turn on and off markers based on zoom scale
                     map.on("mousemove", HoverFeatures); //{ floor: visibleFloor }
                     map.on("click", ShowAttributes);
@@ -496,71 +497,57 @@ $(document).ready(function(){
         map.setFilter('Floor 3 Selection', ['in', 'Room'].concat(roomList));
 
     } // end add Floor Data
+    function formElementChange(){
 
-    $('#building').change(function(){
-        panMap();
         var $roomType = "";
         if($('#building').val() == "ITC"){
             if($('#roomtype').val() != 0){
                 $roomType = $('#roomtype').val();
             }
-            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" , function(result) {
+            //FreeRoomUntil/roomData/{campus}/{building}/{fromTime}/{onDayStr}/{roomType?}
+            $.get("/FreeRoomUntil/roomData/" + $('#campus').val() + "/" + $('#building').val() +
+                "/" + $('#timepicker').val() + "/" +
+                getDayofWeek(new Date()) + "/" + $roomType,
+                function(result) {
+
                 var $roomsObj = JSON.parse(result);
                 roomList = []
                 $.each($roomsObj, function() {
                     roomList.push(this.Room);
                 });
+                //IF WE ARE ALREADY IN FLOOR VIEW, Update building
+                if($('#buildingToggle').text() == 'Step out of Building') {
+                    //alert("we are already in floor view");
+
+                    map.setFilter('Floor 1 Selection', ['in', 'Room'].concat(roomList));
+                    map.setFilter('Floor 2 Selection', ['in', 'Room'].concat(roomList));
+                    map.setFilter('Floor 3 Selection', ['in', 'Room'].concat(roomList));
+                }
             });
             loadBuildingToggle(true);
-        }
-        else{
-            loadBuildingToggle(false);
-        }
 
 
-    });
-    $('#campus').change(function(){
-        var $roomType = "";
-        if($('#building').val() == "ITC"){
-            if($('#roomtype').val() != 0){
-                $roomType = $('#roomtype').val();
-            }
-            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" , function(result) {
-                var $roomsObj = JSON.parse(result);
-                roomList = []
-                $.each($roomsObj, function() {
-                    roomList.push(this.Room);
-                });
-            });
-            loadBuildingToggle(true);
+
+
         }
         else {
             loadBuildingToggle(false); //hide show building view button
         }
+    }
+
+    $('#building').change(function(){
         panMap();
+        formElementChange();
+
+    });
+    $('#campus').change(function(){
+        panMap();
+        formElementChange();
 
     });
 
     $('#roomtype').change(function(){
-        var $roomType = "";
-        if($('#building').val() == "ITC"){
-            if($('#roomtype').val() != 0){
-                $roomType = $('#roomtype').val();
-            }
-            $.get("/FreeRoom/roomData/" + $('#campus').val() + "/" + $('#building').val() + "/" , function(result) {
-                var $roomsObj = JSON.parse(result);
-                roomList = []
-                $.each($roomsObj, function() {
-                    roomList.push(this.Room);
-                });
-            });
-            loadBuildingToggle(true);
-        }
-        else {
-            loadBuildingToggle(false); //hide show building view button
-        }
-        //panMap();
-
+        formElementChange();
     });
 
     /*
@@ -1076,5 +1063,35 @@ $(document).ready(function(){
         if (hours < 10) sHours = "0" + sHours;
         if (minutes < 10) sMinutes = "0" + sMinutes;
         return (sHours + "" + sMinutes);
+    }
+
+    //this is also a duplicate. Quick hack until I figure out imports
+    function getDayofWeek(time){
+        var $day = time.getDay();
+        //return "Wednesday";
+        if($day === 0){
+            return "Sunday";
+        }
+        else if($day === 1){
+            return "Monday";
+        }
+        else if($day === 2){
+            return "Tuesday";
+        }
+        else if($day === 3){
+            return "Wednesday";
+        }
+        else if($day === 4){
+            return "Thursday";
+        }
+        else if($day === 5){
+            return "Friday";
+        }
+        else if($day === 6){
+            return "Saturday";
+        }
+        else {
+            return null;
+        }
     }
 });

@@ -18,7 +18,10 @@ $(document).ready(function(){
         if($('#button1').length) {
             $('#button1').prop("disabled",true);
         }
-
+        var $curTime;
+        if($('#timepicker1').length) {
+            $curTime = $('#timepicker1').val();
+        }
         //get a list of campuses (indexOf not supported in IE8?)
         $campusesList = [];
         $list = [];
@@ -46,7 +49,7 @@ $(document).ready(function(){
                 roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
                 document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
                 formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"),
-                    ConvertTimeformat("24", $('#timepicker1')).val(), "Monday", sessionStorage.getItem("currentRoomType"), "");
+                    ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), sessionStorage.getItem("currentRoomType"), "");
             }
         }
 
@@ -77,7 +80,7 @@ $(document).ready(function(){
             var $roomTypeDropdown = $("#roomtype");
             $roomTypeDropdown.html(''); //remove existing
             $roomTypeDropdown.append($("<option />").val("0").text("<< Any RoomType >>"));
-            $.get("FreeRoom/roomTypeData/" + building, function(data){
+            $.get("/FreeRoom/roomTypeData/" + building, function(data){
                 $roomTypesObj = JSON.parse(data);
                 $.each($roomTypesObj, function() {
                     if(this.RoomType == prevRoomType){
@@ -109,7 +112,7 @@ $(document).ready(function(){
             sessionStorage.setItem("currentBuilding", $selectedBuilding);
             var $prevSelectedRoomType = $('#roomtype').val();
             var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
-            formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $prevSelectedRoomType, "");
+            formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $('#roomtype').val(), "");
         });
 
         $('#building').change(function(){
@@ -130,13 +133,25 @@ $(document).ready(function(){
             formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $('#roomtype').val(), "");
         });
 
-        $('#timepicker1').change(function(){
+        //Because Timepicker is more complex than most elements, change is detected when
+        //focus is lost (both on textbox and button) and a change has been detected.
+        if($('#timepicker1').length){
+            $('#timepicker1').focusout(function(){
 
+                if(document.activeElement.id != 'timepickerbutton1' &&
+                    document.activeElement.id != 'timepicker1' &&
+                    $curTime != $('#timepicker1').val()){
+                    updateFormCall();
+                }
+            })
+        }
+        
+        function updateFormCall(){
             sessionStorage.setItem("currentTime", $('#timepicker1').val());
             var $prevSelectedTime = $('#timepicker1').val();
             formUpdate($('#campus').val(), $('#building').val(),  ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date()), $('#roomtype').val(), "");
+        }
 
-        })
         $('#roomsbox').change(function () {
             if($('#button1').length) {
                 $('#button1').prop("disabled",false);

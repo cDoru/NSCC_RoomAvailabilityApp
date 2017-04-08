@@ -13,7 +13,7 @@
 
 Route::resource('/','HomeController');
 
-
+//free rooms available NOW
 Route::get('FreeRoom/roomData/{campus}/{building}/{roomType?}/{filter?}',
     function($campus, $building, $roomType = null, $filter = null) {
         $filter = strtoupper($filter); //convert uppercase
@@ -53,6 +53,7 @@ Route::get('FreeRoom/roomData/{campus}/{building}/{roomType?}/{filter?}',
 
 }); //handles ajax calls for free rooms
 
+//Room Types for Building
 Route::get('FreeRoom/roomTypeData/{building}', function($building) {
     //'FreeRoomController@retrieveRoomTypeData'
     $roomTypes = DB::table('Rooms')
