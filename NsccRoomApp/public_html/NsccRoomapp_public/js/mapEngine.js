@@ -660,12 +660,12 @@ $(document).ready(function(){
         if (features.length) {
             map.setFilter(floorSelection + "-Hover", ["==", "Room", features[0].properties.Room]);
             map.setFilter(floor + " RoomLabels", ["==", "Room", features[0].properties.Room]);
-            $('#RoomSelect').html(features[0].properties.Room);
+            //$('#RoomSelect').html(features[0].properties.Room);
         } else {
             map.setFilter(floorSelection + "-Hover", ["==", "Room", "##"]);
             map.setFilter(floor + " RoomLabels", ["==", "Room", "##"]);
             //nothing selected
-            $('#RoomSelect').html("");
+            //$('#RoomSelect').html("");
         }
 
     }
