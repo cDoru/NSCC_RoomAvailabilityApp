@@ -526,9 +526,6 @@ $(document).ready(function(){
             });
             loadBuildingToggle(true);
 
-
-
-
         }
         else {
             loadBuildingToggle(false); //hide show building view button
@@ -543,7 +540,6 @@ $(document).ready(function(){
     $('#campus').change(function(){
         panMap();
         formElementChange();
-
     });
 
     $('#roomtype').change(function(){
@@ -649,7 +645,6 @@ $(document).ready(function(){
             }
         }
     }
-
 
 
     // When the user moves their mouse over the page, look for features
