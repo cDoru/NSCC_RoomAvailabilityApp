@@ -46,7 +46,7 @@
                 <div class="input-group bootstrap-timepicker timepicker">
 
                     <input id="timepicker1" type="text" class="form-control input-small">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                    <span id="timepickerbutton1" class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                 </div>
 
                 <script type="text/javascript">
