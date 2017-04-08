@@ -57,7 +57,16 @@
         </div>
 
         <script type="text/javascript">
-            $('#timepicker1').timepicker();
+            $('#timepicker1')
+                    .bind('keydown', function (event) {  // BEGIN APPLYING NinaNa's S.O. ANSWER
+                        if (event.which == 13) {
+                            var e = jQuery.Event("keydown");
+                            e.which = 9;//tab
+                            e.keyCode = 9;
+                            $(this).trigger(e);
+                            return false;
+                        }
+                    }).timepicker();
         </script>
 
 
