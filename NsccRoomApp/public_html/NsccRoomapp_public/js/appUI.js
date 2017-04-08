@@ -13,6 +13,8 @@ var isSafari = /constructor/i.test(window.HTMLElement) ||
 
 $(document).ready(function(){
     //LOAD PAGE ACTION
+    var $list = [];
+    var $campusesList = [];
     if($buildingsObj) {
         //Button only on FreeRoom Page
         if($('#button1').length) {
@@ -22,23 +24,17 @@ $(document).ready(function(){
         if($('#timepicker1').length) {
             $curTime = $('#timepicker1').val();
         }
-        //get a list of campuses (indexOf not supported in IE8?)
-        $campusesList = [];
-        $list = [];
+        //get a list of campuses (indexOf not supported in IE8?
         for (var i = 0; i < $buildingsObj.length; i++) {
-            // if ($campusesList.indexOf($buildingsObj[i]) ==-1){
-            $campusesList.push($buildingsObj[i]);
-
-            // }
+            if(jQuery.inArray($buildingsObj[i].campus, $list) == -1){
+                $list.push($buildingsObj[i].campus);
+                $campusesList.push($buildingsObj[i]);
+            }
         }
 
         //populate campus list
         $.each($campusesList, function () {
-
-            if (!$list.includes(this.campus)) {
-                $("#campus").append($("<option />").val(this.campus).text(this.campusName));
-                $list.push(this.campus);
-            }
+            $("#campus").append($("<option />").val(this.campus).text(this.campusName));
         });
 
         if(isChrome || isSafari) {
@@ -145,7 +141,7 @@ $(document).ready(function(){
                 }
             })
         }
-        
+
         function updateFormCall(){
             sessionStorage.setItem("currentTime", $('#timepicker1').val());
             var $prevSelectedTime = $('#timepicker1').val();
@@ -222,38 +218,28 @@ $(document).ready(function(){
                         $( "#roomsbox" ).append($("<option />").val(this.Room).text(this.Room + " | " + $AvailMsg));
                     })
                 });
-
-
-
             });
-
-
         }
 
     }///////////////////////////////////////////////////////
-    else if($scheduleBuildingsObj){
+    else if($scheduleBuildingsObj){ //THIS IS FOR THE RoomSchedule Blade (NEEDS Refactoring)
 
         var $submitBtn = document.getElementById('button');
         $submitBtn.disabled = true;
 
-        $campusesList = [];
-        $list = [];
+        //get a list of campuses (indexOf/includes both not supported in IE
         for (var i = 0; i < $scheduleBuildingsObj.length; i++) {
-            // if ($campusesList.indexOf($buildingsObj[i]) ==-1){
-            $campusesList.push($scheduleBuildingsObj[i]);
-
-            // }
+            if(jQuery.inArray($scheduleBuildingsObj[i].campus, $list) == -1){
+                $list.push($scheduleBuildingsObj[i].campus);
+                $campusesList.push($scheduleBuildingsObj[i]);
+            }
         }
 
         //populate campus list
         $.each($campusesList, function () {
-
-            if (!$list.includes(this.campus)) {
-                $("#scheduleCampus").append($("<option />").val(this.campus).text(this.campusName));
-                $list.push(this.campus);
-            }
+            $("#scheduleCampus").append($("<option />").val(this.campus).text(this.campusName));
         });
-
+      
         if(isChrome || isSafari) {
             if (sessionStorage.getItem("scheduleCampus") != null) {
                 document.getElementById('scheduleCampus').value = sessionStorage.getItem("scheduleCampus");
