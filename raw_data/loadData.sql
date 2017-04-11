@@ -295,7 +295,7 @@ CREATE PROCEDURE GetFreeRoomsNow()
           WHERE id = DAYOFWEEK(GetAtlanticNow())
           ), '%')
         AND
-          (TIME(NOW()) > startTime
+          (TIME(NOW()) >= startTime
           AND TIME(NOW()) < endTime)
         AND
           (DATE(NOW()) > startDate
@@ -316,7 +316,7 @@ BEGIN
 	END IF;
       SELECT startTime FROM nsccSchedule
 		WHERE room = roomNum
-		AND	(DATE(NOW()) > startDate
+		AND	(DATE(NOW()) >= startDate
 		AND DATE(NOW()) < endDate)
 
 		AND days LIKE CONCAT('%',(
@@ -357,7 +357,7 @@ BEGIN
           (TIME(STR_TO_DATE(timeStr,'%H%i')) > startTime
           AND TIME(STR_TO_DATE(timeStr,'%H%i')) < endTime)
         AND
-          (DATE(GetAtlanticNow()) > startDate
+          (DATE(GetAtlanticNow()) >= startDate
           AND DATE(GetAtlanticNow()) < endDate)
       );
 END//
