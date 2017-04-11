@@ -347,8 +347,9 @@ $(document).ready(function(){
         var minutes = Number($endTimeStr.match(/:(\d+)/)[1]);
         var $endTimeDate =  new Date(1,1,1,hours,minutes);
         var $startTimeDate = new Date(1,1,1, startTime.toString().substr(0,2), startTime.toString().substr(2,2));
-        var $diff = ($endTimeDate - $startTimeDate) / 36000;
-        return $diff;
+        var $minutes = (($endTimeDate - $startTimeDate) /60) / 1000;
+
+        return $minutes;
     }
 
     function getDayofWeek(time){
