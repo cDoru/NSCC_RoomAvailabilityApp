@@ -137,6 +137,7 @@ $(document).ready(function(){
                 if(document.activeElement.id != 'timepickerbutton1' &&
                     document.activeElement.id != 'timepicker1' &&
                     $curTime != $('#timepicker1').val()){
+                    $curTime = $('#timepicker1').val();
                     updateFormCall();
                 }
             })
