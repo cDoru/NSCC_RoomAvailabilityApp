@@ -88,8 +88,8 @@
         {{--THIS SHOULD BE SEPERATE BLADE COMPONENT --}}
         <div id="roomstable">
         </div>
-        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet' />
         <script src="{{ asset('js/appUI.js') }}"></script>
         <script src="{{ asset('js/mapEngine.js') }}"></script>
 
