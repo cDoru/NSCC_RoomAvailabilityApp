@@ -25,10 +25,10 @@ $(document).ready(function(){
         }
         else {
             floorMode = false;
-            map.setStyle('mapbox://styles/mapbox/streets-v9');
+            //mapbox://styles/ryansutc/cj1gnlx79000l2rmifdq4a0it
+            map.setStyle('mapbox://styles/ryansutc/cj1gnlx79000l2rmifdq4a0it');//mapbox://styles/mapbox/streets-v9'
             $('#mapmenu').hide(); //hide the floor option buttons
         }
-
     });
 
     //Initial load of the map element
@@ -37,8 +37,6 @@ $(document).ready(function(){
         $('#map').html('<h4>No WebGL Support</h4><p>Sorry your browser is old and does not support WebGL</p>');
     }
     else {
-
-
         var map = new mapboxgl.Map({
             container: 'map', // container id
             style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
@@ -61,7 +59,8 @@ $(document).ready(function(){
 
                     $("#campus").prop("disabled", true);
                     $("#building").prop("disabled", true);
-
+                    map.off("click", ShowCampusDetails);
+                    //map.off("mousemove", HoverBuildings);
                     map.on("zoomend", redrawMarkers) //turn on and off markers based on zoom scale
                     map.on("mousemove", HoverFeatures); //{ floor: visibleFloor }
                     map.on("click", ShowAttributes);
@@ -72,17 +71,25 @@ $(document).ready(function(){
 
                 }
                 else {
+                    loadCampusData(); //load campuses and zoom to
                     $("#campus").prop("disabled", false);
                     $("#building").prop("disabled", false);
                     map.off("zoomend");
                     map.off("mousemove", HoverFeatures);
                     map.off("mouseout", UnHoverFeatures);
                     map.off("click", ShowAttributes);
-                    loadCampusData(); //load campuses and zoom to
+
+                    //map.on("mousemove", HoverBuildings);
+                    map.on("click", ShowCampusDetails);
                     //alert(map.isSourceLoaded('ITCampus_f3'));
                     panMap();
                     $('#buildingToggle').text('Step Into Building');
                 }
+            }
+            else {
+                loadCampusData(); //load campuses and zoom to (happen also if NOT INSTI campus!)
+                map.on("click", ShowCampusDetails);
+                //map.on("mousemove", HoverBuildings);
             }
         });
     }
@@ -110,7 +117,6 @@ $(document).ready(function(){
                 if(this.properties.BUILDING == building) {
                     $coords = this.geometry.coordinates;
                     return false;
-
                 }
             });
         });
@@ -169,18 +175,35 @@ $(document).ready(function(){
     function loadCampusData() {
         map.setMinZoom(5);
         var bounds = [
-            [-68.09,42.40], // Southwest coordinates
+            [-68.09, 42.40], // Southwest coordinates
             [-59.46, 47.40]  // Northeast coordinates
         ];
         map.setMaxBounds(bounds);
-
-        map.addLayer({
-            'id': 'campuses',
-            'type': 'symbol',
-            'source': {
-                'type': 'geojson',
-                'data': './media/campuses.txt'
+        map.loadImage('./img/icons/School.png', function (error, image) {
+            if (error) {
+                alert("could not load school icons");
             }
+
+            map.addImage('school', image);
+
+            map.addSource('campuses', {
+                type: 'vector',
+                url: 'mapbox://ryansutc.bokyiufq'
+            });
+
+            map.addLayer({
+                'id': 'campuses', //Actually it is buildings!
+                'type': 'symbol',
+                'source': 'campuses',
+                "layout": {
+                    "icon-image": 'school',
+                    "icon-size": 0.75
+
+                },
+                'source-layer': 'Campuses-2hqb70',
+                //'filter': ['==', 'Room', '##'],
+                "maxzoom": 15
+            });
         });
     }
     /*
@@ -647,6 +670,15 @@ $(document).ready(function(){
     }
 
 
+    function HoverBuildings(event){
+        var features = map.queryRenderedFeatures(event.point, { layers: ['campuses'] });
+        if (features.length) {
+            //make icon slightly larger
+            //setStyle
+            alert(features[0].properties.Notes);
+            //There are issues getting the features from the responsible geoJSON data
+        }
+    }
     // When the user moves their mouse over the page, look for features
     // at the mouse position (e.point) and within the states layer (states-fill).
     // If a feature is found, then we'll update the filter in the state-fills-hover
@@ -724,6 +756,40 @@ $(document).ready(function(){
 
         }
 
+    }
+
+    //handles campus/building icon onclick
+    function ShowCampusDetails(event){
+        var features = map.queryRenderedFeatures(event.point, { layers: ['campuses']});
+
+        if (features.length) {
+            if(map.getZoom() < 11){
+                map.flyTo({
+                    center: features[0].geometry.coordinates,
+                    zoom: 13,
+                    speed: 0.6
+                });
+            }
+            else {
+                var $link = "/img/buildings/" + features[0].properties.BUILDING + ".jpg";
+                var $note;
+                if(features[0].properties.BUILDING != 'ITC'){
+                    $note = '<p>Sorry a floor plan is not yet available for this building</p>'
+                }
+                else {
+                    $note = "<p>Select the Building from the dropdown to view floor plan and rooms</p>";
+                }
+                var popup = new mapboxgl.Popup({ offset: [0, -15] })
+                    .setLngLat(features[0].geometry.coordinates)
+                    .setHTML('<img src="' + $link + '" alt="Campus"/> <br/>' + features[0].properties.CAMPUS +
+                        '<p>' + features[0].properties.NOTES + '</p>' +
+                            $note
+                        )
+                    //.setLngLat(feature.geometry.coordinates)
+                    .addTo(map);
+                
+            }
+        }
     }
 
     function loadFloorMarkersData(){
