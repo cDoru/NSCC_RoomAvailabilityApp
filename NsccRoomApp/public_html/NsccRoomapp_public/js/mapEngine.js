@@ -173,6 +173,10 @@ $(document).ready(function(){
     }
 
     function loadCampusData() {
+        // disable map rotation using right click + drag
+        map.dragRotate.enable();
+        // disable map rotation using touch rotation gesture
+        map.touchZoomRotate.enableRotation();
         map.setMinZoom(5);
         var bounds = [
             [-68.09, 42.40], // Southwest coordinates
@@ -211,16 +215,39 @@ $(document).ready(function(){
      */
     function loadFloorData() {
         //zoom in a bit and restrict panning map to area
+        map.dragRotate.disable();
+        // disable map rotation using touch rotation gesture
+        map.touchZoomRotate.disableRotation();
 
         var bounds = [
-            [-63.617,44.664], // Southwest coordinates
-            [-63.610, 44.68]  // Northeast coordinates
+            [-63.616,44.664], // Southwest coordinates
+            [-63.611, 44.68]  // Northeast coordinates
         ];
         map.setMinZoom(13);
-        map.zoomTo(14);
+        map.zoomTo(14.5);
         map.setMaxBounds(bounds);
         map.setCenter([-63.614, 44.6697]);
         map.rotateTo(-45, {duration:3000});
+
+        //temporarily suspend user interaction until rotate done
+        map.boxZoom.disable();
+        map.dragPan.disable();
+        map.doubleClickZoom.disable();
+
+        //reinstate user interaction, enforce rotation if not already done
+        setTimeout(function(){
+            map.boxZoom.enable();
+            map.dragPan.enable();
+            map.doubleClickZoom.enable();
+            map.setBearing(-45);
+        }, 1700);
+
+
+
+        //reinstate user interaction, except rotate
+
+        // disable map rotation using right click + drag
+
 
         map.addSource('ITCampus_footprint', {
             type: 'vector',
@@ -518,7 +545,7 @@ $(document).ready(function(){
         map.setFilter('Floor 1 Selection', ['in', 'Room'].concat(roomList));
         map.setFilter('Floor 2 Selection', ['in', 'Room'].concat(roomList));
         map.setFilter('Floor 3 Selection', ['in', 'Room'].concat(roomList));
-
+        //map.setBearing(-45);
     } // end add Floor Data
     function formElementChange(){
 
@@ -774,10 +801,10 @@ $(document).ready(function(){
                 var $link = "/img/buildings/" + features[0].properties.BUILDING + ".jpg";
                 var $note;
                 if(features[0].properties.BUILDING != 'ITC'){
-                    $note = '<p>Sorry a floor plan is not yet available for this building</p>'
+                    $note = '<p>Sorry a floor plan is not yet <br/> available for this building</p>'
                 }
                 else {
-                    $note = "<p>Select the Building from the dropdown to view floor plan and rooms</p>";
+                    $note = "<p>Select the Building from the dropdown <br/> to view floor plan and rooms</p>";
                 }
                 var popup = new mapboxgl.Popup({ offset: [0, -15] })
                     .setLngLat(features[0].geometry.coordinates)
