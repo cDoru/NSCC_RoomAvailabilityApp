@@ -95,7 +95,8 @@ Route::get('FreeRoomUntil/roomData/{campus}/{building}/{fromTime}/{onDayStr}/{ro
         }
 
         //No roomType provided
-        $matchingRooms = DB::select('CALL RoomAvailUntilBatch(?,?,?,?,?)', array($campus, $building, $fromTime,$onDayNo, $roomType));
+        $matchingRooms = DB::select('CALL RoomAvailUntilBatch(?,?,?,?,?)',
+            array($campus, $building, $fromTime,$onDayNo, $roomType));
 
         return json_encode($matchingRooms);
 
