@@ -80,7 +80,7 @@ Route::get('FreeRoomUntil/{roomNum}/{onDayStr?}/{strTime?}', function($roomNum, 
     return json_encode($until);
 });
 
-//New: Variant of RoomAvailUntil via function and with date time variables
+//Variant of RoomAvailUntil via function and with date time variables
 Route::get('FreeRoomUntil/roomData/{campus}/{building}/{fromTime}/{onDayStr}/{roomType?}',
     function($campus, $building, $fromTime, $onDayStr, $roomType = null){
 
@@ -101,6 +101,24 @@ Route::get('FreeRoomUntil/roomData/{campus}/{building}/{fromTime}/{onDayStr}/{ro
         return json_encode($matchingRooms);
 
 });
+
+//New: Variant of RoomAvailUntil for a specific date/time
+Route::get('FreeRoomOnUntil/roomData/{campus}/{building}/{fromTime}/{onDate}/{roomType?}',
+    function($campus, $building, $fromTime, $onDate, $roomType = null){
+
+        $myDateStr = Date('Ymd', strtotime($onDate)); //convert date to string YYYYMMDD
+
+
+        if(!$roomType){
+            $roomType = "";
+        }
+        //No roomType provided
+        $matchingRooms = DB::select('CALL RoomAvailOnUntilBatch(?,?,?,?,?)',
+            array($campus, $building, $fromTime,$myDateStr, $roomType));
+
+        return json_encode($matchingRooms);
+    }
+);
 
 Route::resource('/FreeRoom','FreeRoomController'
     ,  ['only' => ['index', 'show', 'store']]

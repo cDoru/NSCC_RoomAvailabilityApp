@@ -555,9 +555,9 @@ $(document).ready(function(){
                 $roomType = $('#roomtype').val();
             }
             //FreeRoomUntil/roomData/{campus}/{building}/{fromTime}/{onDayStr}/{roomType?}
-            $.get("/FreeRoomUntil/roomData/" + $('#campus').val() + "/" + $('#building').val() +
+            $.get("/FreeRoomOnUntil/roomData/" + $('#campus').val() + "/" + $('#building').val() +
                 "/" + $('#timepicker').val() + "/" +
-                getDayofWeek(new Date()) + "/" + $roomType,
+                new Date() + "/" + $roomType,
                 function(result) {
 
                 var $roomsObj = JSON.parse(result);
