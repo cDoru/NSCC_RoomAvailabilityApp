@@ -165,7 +165,7 @@ $(document).ready(function(){
             if($('#campus').val() != 0) {
                 formUpdate($('#campus').val(), $('#building').val(),
                     ConvertTimeformat("24", $('#timepicker1').val()),
-                    new Date($('#datepickerinput').val()), $('#roomtype').val(), "");
+                    formatAsDateStamp(new Date($('#datepickerinput').val())), $('#roomtype').val(), "");
             }
 
         }
