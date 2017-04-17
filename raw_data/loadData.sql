@@ -235,7 +235,6 @@ UPDATE BuildingsLU SET buildingName = 'ST CAMPUS' WHERE building = 'ST CAMPUS';
 -- ###################################################
 
 -- Create Function to get Atlantic Time
-
 -- Gets the current time (whether Standard or Daylight Savings for Atlantic. Works for 2017, 2018)
 -- This is a hack to deal with the fact that the database is set to EST.
 DROP FUNCTION IF EXISTS GetAtlanticNow;
@@ -261,7 +260,7 @@ DELIMITER ;
 
 
 
--- NEW: Create FreeRoomsNow as a dynamic view
+-- Create FreeRoomsNow as a dynamic view
 DROP VIEW IF EXISTS FreeRoomsNowView;
 CREATE VIEW FreeRoomsNowView AS
  (
@@ -282,6 +281,7 @@ CREATE VIEW FreeRoomsNowView AS
       )
 );
 
+-- Original Get Free Rooms Procedure
 DROP PROCEDURE IF EXISTS GetFreeRoomsNow;
 DELIMITER //
 CREATE PROCEDURE GetFreeRoomsNow()
@@ -305,7 +305,7 @@ CREATE PROCEDURE GetFreeRoomsNow()
 DELIMITER ;
 
 
--- PROCEDURE to get next booking of given room.
+-- PROCEDURE to get next booking of single given room.
 DROP PROCEDURE IF EXISTS RoomAvailableUntil;
 DELIMITER //
 CREATE PROCEDURE `RoomAvailableUntil`(
@@ -331,7 +331,7 @@ BEGIN
 	END//
 DELIMITER ;
 
--- Get Rooms avail Until in a Procedure Call as Batch
+-- Get Rooms avail Until in a Procedure as Batch (calls Function)
 DROP PROCEDURE IF EXISTS RoomAvailUntilBatch;
 DELIMITER //
 CREATE PROCEDURE `RoomAvailUntilBatch`(
@@ -363,6 +363,44 @@ BEGIN
 END//
 DELIMITER ;
 
+-- NEW: Get Rooms avail Until in a Procedure as Batch (calls Function) using a set DATE
+DROP PROCEDURE IF EXISTS RoomAvailOnUntilBatch;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RoomAvailOnUntilBatch`(
+	IN campus VARCHAR(15), IN building VARCHAR(15),
+    IN timeStr VARCHAR(255), IN onDateStr VARCHAR(9), IN roomType VARCHAR(255))
+BEGIN
+	DECLARE OnDate DATE;
+    SET OnDate = STR_TO_DATE(onDateStr, '%Y%m%d');
+
+
+    IF roomType IS NULL THEN
+		SET roomType = '';
+	END IF;
+    IF OnDate IS NOT NULL THEN
+
+		SELECT r.Room, RoomAvailableOnUntil(r.Room, timeStr, onDate) as AvailUntil
+		FROM Rooms r
+		WHERE r.Campus = campus
+		AND r.Building = building
+		AND r.RoomType LIKE CONCAT(roomType, '%')
+		AND room NOT IN(
+			SELECT DISTINCT room FROM nsccSchedule
+			WHERE days LIKE CONCAT('%',(
+			  SELECT dayChar
+			  FROM daysLU
+			  WHERE id = DAYOFWEEK(onDate)
+			  ), '%')
+			AND
+			  (TIME(STR_TO_DATE(timeStr,'%H%i')) >= startTime
+			  AND TIME(STR_TO_DATE(timeStr,'%H%i')) < endTime)
+			AND
+			  (onDate > startDate
+			  AND onDate < endDate)
+		  );
+	END IF;
+END//
+DELIMITER;
 
 -- Get Rooms Until As a Function (REVISED, now takes time, day of week)
 DROP FUNCTION IF EXISTS RoomAvailableUntil;
@@ -393,3 +431,32 @@ BEGIN
 END//
 DELIMITER ;
 
+
+-- NEW Get Rooms Until As a Function (REVISED, now takes time, AND SPECIFIC DATE)
+DROP FUNCTION IF EXISTS RoomAvailableOnUntil;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` FUNCTION `RoomAvailableOnUntil`(roomNum VARCHAR(255),
+		nowTime VARCHAR(255), nowDate DATE) RETURNS time
+BEGIN
+	DECLARE nextTime TIME;
+
+	SELECT MIN(startTime) INTO nextTime
+		FROM nsccSchedule
+		WHERE room = roomNum
+
+		AND	(DATE(nowDate) > startDate
+		AND DATE(nowDate) < endDate)
+
+		AND days LIKE CONCAT('%',
+        (
+			SELECT dayChar
+			FROM daysLU
+			WHERE id = DAYOFWEEK(nowDate)
+		), '%')
+
+    -- Input time should be like so: '1815'
+		AND startTime > TIME(STR_TO_DATE(nowTime, '%H%i'));
+
+	RETURN nextTime;
+END//
+DELIMITER ;
