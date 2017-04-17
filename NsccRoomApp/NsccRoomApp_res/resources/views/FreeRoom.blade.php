@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/css/fullcalendar.css' />
     <link rel="stylesheet" href="/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" href="/css/freerooms.css" />
     {{--<script src='{{asset('/js/jquery.min.js')}}'></script>--}}
 
     <script src='{{asset('/js/moment.min.js')}}'></script>
@@ -23,7 +24,6 @@
 
     <div class="container col-md-8 col-xl-6 col-md-offset-2 col-xl-offset-3">
         <div class="row">
-            {{--<h1>NSCC Room Availability App</h1>--}}
             <h3>Find Rooms Available Now</h3>
             <form method="post" name="myform" id="myform" style="background-color: #b4b472">
                 {{ csrf_field() }}
@@ -70,9 +70,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="row"><p></p></div>
+            </form>
 
-
-                <script type="text/javascript">
+            <script type="text/javascript">
                     $('#timepicker1')
                             .bind('keydown', function (event) {  // BEGIN APPLYING NinaNa's S.O. ANSWER
                                 if (event.which == 13) {
@@ -100,19 +101,21 @@
                         }
                     });
                 </script>
-
-                <div class="form-group">
-                    <label for="roomsbox">Rooms Available Now</label>
-                    <select size="6" name="roomsbox" id="roomsbox" class="form-control">
-                    </select>
-                </div>
-
-                <div align="center" class="form-group">
-                    <button type="button" name="button1" id="button1" class="btn btn-primary">View Room Schedule</button>
-                </div>
-
-            </form>
+            <!-- Table Results. NEW -->
+            <div class="table-responsive">
+                <table id="roomstable" class="table table-condensed table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Room Name</th>
+                        <th class="avail"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="roomstablebody">
+                    </tbody>
+                </table>
+            </div>
         </div>
+
 
     </div>
 

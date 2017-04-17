@@ -16,12 +16,11 @@ $(document).ready(function(){
     var $list = [];
     var $campusesList = [];
     if($buildingsObj) {
-        //Button only on FreeRoom Page
-        if ($('#button1').length) {
-            $('#button1').prop("disabled", true);
-        }
+
         var $curTime;
         var $curDate;
+
+        //On Map and Free Rooms Page
         if ($('#timepicker1').length) {
             $curTime = $('#timepicker1').val();
         }
@@ -49,7 +48,8 @@ $(document).ready(function(){
                 roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
                 document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
                 formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"),
-                    ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date($('#datepickerinput').val())), sessionStorage.getItem("currentRoomType"), "");
+                    ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date($('#datepickerinput').val())),
+                    sessionStorage.getItem("currentRoomType"), "");
             }
         }
 
@@ -96,11 +96,9 @@ $(document).ready(function(){
             return $roomTypeDropdown.val();
         }
 
-
+        //User Changes campus
         $('#campus').change(function () {
-            if ($('#button1').length) {
-                $('#button1').prop("disabled", true);
-            }
+
             //campus item change
             if ($("#campus option[value='0']").length > 0) {
                 $("#campus option[value='0']").remove();
@@ -114,7 +112,7 @@ $(document).ready(function(){
             formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()),
                 new Date($('#datepickerinput').val()), $('#roomtype').val(), "");
         });
-
+        //Build changes (occurs as part of trickle down when campus changes?)
         $('#building').change(function () {
             if ($('#button1').length) {
                 $('#button1').prop("disabled", true);
@@ -125,7 +123,7 @@ $(document).ready(function(){
             formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()),
                 new Date($('#datepickerinput').val()), $('#roomtype').val(), "");
         });
-
+        //Room Type changes (occurs in trickledown also?)
         $('#roomtype').change(function () {
             if ($('#button1').length) {
                 $('#button1').prop("disabled", true);
@@ -149,7 +147,7 @@ $(document).ready(function(){
             })
         }
 
-        //Do something with datepicker
+        //Do something with datepicker when changes
         if ($('#datepickerinput').length) {
             $('#datepicker1').focusout(function () {
                 if($curDate != $('#datepickerinput').val()) {
@@ -172,19 +170,6 @@ $(document).ready(function(){
 
         }
 
-        $('#roomsbox').change(function () {
-            if($('#button1').length) {
-                $('#button1').prop("disabled",false);
-            }
-            // window.location = "/RoomSchedule/" + $('#roomsbox').val().toString();
-        });
-
-        if($('#button1').length) {
-            $('#button1').click(function() {
-                window.location = "/RoomSchedule/" + $('#roomsbox').val().toString();
-            });
-        }
-
 
         function formUpdate(campus, building, fromTime, onStrDate, roomType, filter){
             //called when all form items are populated and ready to fetch room data
@@ -194,27 +179,28 @@ $(document).ready(function(){
             if(roomType != 0 && roomType != null){
                 $roomType = roomType;
             }
+            //initial call of just rooms
             $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
 
                 var $roomsObj = JSON.parse(result);
-                $("#roomsbox").html('');
+                $("#roomstablebody").html('');
                 // $("#roomstable").html(result);
 
                 // $( "#roomsbox" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
                 $.each($roomsObj, function() {
-                    $( "#roomsbox" ).append($("<option />").val(this.Room).text(this.Room));
-                })
+                    $( "#roomstablebody" ).append('<tr><td>' + this.Room +'</td><td></td></tr>');
+                });
                 
                 //New: Count amount of records returned and getAvailableUntil from that
                 var $roomsWUntilObj;
-                //If lots of records do a big batch request
+                //second call with rooms and with Available until results
                 $.get("/FreeRoomOnUntil/roomData/" + campus + "/" + building + "/" + fromTime + "/" +
                             onStrDate + "/" + $roomType, function(result) {
                     $roomsWUntilObj = JSON.parse(result);
                 })
                 //When done update records
                 .done(function() {
-                    $("#roomsbox").html('');
+                    $("#roomstablebody").html('');
                     $.each($roomsWUntilObj, function() {
                         var $AvailMsg;
 
@@ -223,23 +209,29 @@ $(document).ready(function(){
                             var $hrLength = Math.floor($timeLength/60);
                             var $minLength = $timeLength % 60;
                             if($timeLength >= 120){
-                                $AvailMsg = "Available for next ~" + $hrLength + " hours";
+                                $AvailMsg = "Avail. for next ~" + $hrLength + " hours";
                             }
                             else if($timeLength > 60) {
-                                $AvailMsg = "Available for next hour and " + $minLength + " mins";
+                                $AvailMsg = "Avail. for next hour and " + $minLength + " mins";
                             }
                             else if($timeLength == 60){
-                                $AvailMsg = "Available for next hour";
+                                $AvailMsg = "Avail. for next hour";
                             }
                             else {
-                                $AvailMsg = "Available for next " + $minLength + " minutes";
+                                $AvailMsg = "Avail. for next " + $minLength + " minutes";
                             }
                         }
                         else {
-                            $AvailMsg = "Available rest of day";
+                            $AvailMsg = "Avail. rest of day";
                         }
 
-                        $( "#roomsbox" ).append($("<option />").val(this.Room).text(this.Room + " | " + $AvailMsg));
+                        $( "#roomstablebody" ).append('<tr>' +
+                            '<td class="room">' +
+                            '<a href="/RoomSchedule/' + this.Room + '" data-toggle="tooltip" title="View Room Schedule">' + this.Room + '</a>' +
+                            '</td><td class="avail">' +
+                            '<span class="schedule"><a href="/RoomSchedule/' + this.Room + '">' +
+                            '<i class="glyphicon glyphicon-calendar" data-toggle="tooltip" title="View Room Schedule"></i></a></span>' +
+                            $AvailMsg + '</td></tr>');
                     })
                 });
             });
