@@ -48,7 +48,7 @@ $(document).ready(function(){
                 roomTypeUpdate(sessionStorage.getItem("currentBuilding"), sessionStorage.getItem("currentRoomType"));
                 document.getElementById('roomtype').value = sessionStorage.getItem("currentRoomType");
                 formUpdate(sessionStorage.getItem("currentCampus"), sessionStorage.getItem("currentBuilding"),
-                    ConvertTimeformat("24", $('#timepicker1').val()), getDayofWeek(new Date($('#datepickerinput').val())),
+                    ConvertTimeformat("24", $('#timepicker1').val()), formatAsDateStamp(new Date($('#datepickerinput').val())),
                     sessionStorage.getItem("currentRoomType"), "");
             }
         }
@@ -110,7 +110,7 @@ $(document).ready(function(){
             var $prevSelectedRoomType = $('#roomtype').val();
             var $selectedRoomType = roomTypeUpdate($selectedBuilding, $prevSelectedRoomType);
             formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()),
-                new Date($('#datepickerinput').val()), $('#roomtype').val(), "");
+                formatAsDateStamp(new Date($('#datepickerinput').val())), $('#roomtype').val(), "");
         });
         //Build changes (occurs as part of trickle down when campus changes?)
         $('#building').change(function () {
@@ -121,7 +121,7 @@ $(document).ready(function(){
             var $prevSelectedRoomType = $('#roomtype').val();
             var $selectedRoomType = roomTypeUpdate($('#building').val(), $prevSelectedRoomType);
             formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()),
-                new Date($('#datepickerinput').val()), $('#roomtype').val(), "");
+                formatAsDateStamp(new Date($('#datepickerinput').val())), $('#roomtype').val(), "");
         });
         //Room Type changes (occurs in trickledown also?)
         $('#roomtype').change(function () {
@@ -130,7 +130,7 @@ $(document).ready(function(){
             }
             sessionStorage.setItem("currentRoomType", $('#roomtype').val());
             formUpdate($('#campus').val(), $('#building').val(), ConvertTimeformat("24", $('#timepicker1').val()),
-                new Date($('#datepickerinput').val()), $('#roomtype').val(), "");
+                formatAsDateStamp(new Date($('#datepickerinput').val())), $('#roomtype').val(), "");
         });
 
         //Because Timepicker is more complex than most elements, change is detected when
@@ -179,61 +179,48 @@ $(document).ready(function(){
             if(roomType != 0 && roomType != null){
                 $roomType = roomType;
             }
-            //initial call of just rooms
-            $.get("/FreeRoom/roomData/" + campus + "/" + building + "/" + $roomType, function(result){
 
-                var $roomsObj = JSON.parse(result);
+
+            //second call with rooms and with Available until results
+            $.get("/FreeRoomOnUntil/roomData/" + campus + "/" + building + "/" + fromTime + "/" +
+                        onStrDate + "/" + $roomType, function(result) {
+                $roomsWUntilObj = JSON.parse(result);
+            })
+            //When done update records
+            .done(function() {
                 $("#roomstablebody").html('');
-                // $("#roomstable").html(result);
+                $.each($roomsWUntilObj, function() {
+                    var $AvailMsg;
 
-                // $( "#roomsbox" ).append( "<table><tr><th>Free Rooms Matching Your Criteria</th></tr>" );
-                $.each($roomsObj, function() {
-                    $( "#roomstablebody" ).append('<tr><td>' + this.Room +'</td><td></td></tr>');
-                });
-                
-                //New: Count amount of records returned and getAvailableUntil from that
-                var $roomsWUntilObj;
-                //second call with rooms and with Available until results
-                $.get("/FreeRoomOnUntil/roomData/" + campus + "/" + building + "/" + fromTime + "/" +
-                            onStrDate + "/" + $roomType, function(result) {
-                    $roomsWUntilObj = JSON.parse(result);
-                })
-                //When done update records
-                .done(function() {
-                    $("#roomstablebody").html('');
-                    $.each($roomsWUntilObj, function() {
-                        var $AvailMsg;
-
-                        if(this.AvailUntil != null){
-                            var $timeLength = getTimeLength(fromTime, this.AvailUntil);
-                            var $hrLength = Math.floor($timeLength/60);
-                            var $minLength = $timeLength % 60;
-                            if($timeLength >= 120){
-                                $AvailMsg = "Avail. for next ~" + $hrLength + " hours";
-                            }
-                            else if($timeLength > 60) {
-                                $AvailMsg = "Avail. for next hour and " + $minLength + " mins";
-                            }
-                            else if($timeLength == 60){
-                                $AvailMsg = "Avail. for next hour";
-                            }
-                            else {
-                                $AvailMsg = "Avail. for next " + $minLength + " minutes";
-                            }
+                    if(this.AvailUntil != null){
+                        var $timeLength = getTimeLength(fromTime, this.AvailUntil);
+                        var $hrLength = Math.floor($timeLength/60);
+                        var $minLength = $timeLength % 60;
+                        if($timeLength >= 120){
+                            $AvailMsg = "Avail. for next ~" + $hrLength + " hours";
+                        }
+                        else if($timeLength > 60) {
+                            $AvailMsg = "Avail. for next hour and " + $minLength + " mins";
+                        }
+                        else if($timeLength == 60){
+                            $AvailMsg = "Avail. for next hour";
                         }
                         else {
-                            $AvailMsg = "Avail. rest of day";
+                            $AvailMsg = "Avail. for next " + $minLength + " minutes";
                         }
+                    }
+                    else {
+                        $AvailMsg = "Avail. rest of day";
+                    }
 
-                        $( "#roomstablebody" ).append('<tr>' +
-                            '<td class="room">' +
-                            '<a href="/RoomSchedule/' + this.Room + '" data-toggle="tooltip" title="View Room Schedule">' + this.Room + '</a>' +
-                            '</td><td class="avail">' +
-                            '<span class="schedule"><a href="/RoomSchedule/' + this.Room + '">' +
-                            '<i class="glyphicon glyphicon-calendar" data-toggle="tooltip" title="View Room Schedule"></i></a></span>' +
-                            $AvailMsg + '</td></tr>');
-                    })
-                });
+                    $( "#roomstablebody" ).append('<tr>' +
+                        '<td class="room">' +
+                        '<a href="/RoomSchedule/' + this.Room + '" data-toggle="tooltip" title="View Room Schedule">' + this.Room + '</a>' +
+                        '</td><td class="avail">' +
+                        '<span class="schedule"><a href="/RoomSchedule/' + this.Room + '">' +
+                        '<i class="glyphicon glyphicon-calendar" data-toggle="tooltip" title="View Room Schedule"></i></a></span>' +
+                        $AvailMsg + '</td></tr>');
+                })
             });
         }
 
@@ -395,5 +382,13 @@ $(document).ready(function(){
             return null;
         }
     }
-    
+
+    function formatAsDateStamp(date){
+        var curr_day = "0" + date.getDate();
+        curr_day = curr_day.substr(curr_day.length -2, 2);
+        var curr_month = "0" + (date.getMonth() + 1);
+        curr_month = curr_month.substr(curr_month.length -2, 2);
+        var curr_year = date.getFullYear();
+        return (curr_year + curr_month + curr_day);
+    }
 });
